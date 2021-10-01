@@ -9,7 +9,7 @@ class LandingPage extends GetView<LandingController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Gauge"),
+        title: Text("Landing page"),
       ),
       body: Container(
         child: GetX<LandingController>(
