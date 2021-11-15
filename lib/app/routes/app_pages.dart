@@ -1,5 +1,7 @@
 import 'package:gauge_iot/app/modules/landing/landing_binding.dart';
 import 'package:gauge_iot/app/modules/landing/landing_page.dart';
+import 'package:gauge_iot/app/modules/teacher/activities/addActivity/teacher_addActivity_binding.dart';
+import 'package:gauge_iot/app/modules/teacher/activities/addActivity/teacher_addActivity_page.dart';
 import 'package:gauge_iot/app/modules/teacher/activities/teacher_activity_binding.dart';
 import 'package:gauge_iot/app/modules/teacher/activities/teacher_activity_page.dart';
 import 'package:gauge_iot/app/modules/teacher/children/addChildren/teacher_addChild_binding.dart';
@@ -7,6 +9,7 @@ import 'package:gauge_iot/app/modules/teacher/children/addChildren/teacher_addCh
 import 'package:gauge_iot/app/modules/teacher/children/teacher_children_binding.dart';
 import 'package:gauge_iot/app/modules/teacher/children/teacher_children_controller.dart';
 import 'package:gauge_iot/app/modules/teacher/children/teacher_children_page.dart';
+import 'package:gauge_iot/app/modules/teacher/home/teacher_home_page.dart';
 import 'package:gauge_iot/app/modules/teacher/mainTab/teacher_main_tab_binding.dart';
 import 'package:gauge_iot/app/modules/teacher/mainTab/teacher_main_tab_page.dart';
 import 'package:get/get.dart';
@@ -24,6 +27,10 @@ class AppPages {
 
     // TEACHER PAGES
     GetPage(
+      name: Routes.TEACHER_HOME, 
+      page: () => TeacherHomePage()
+    ),
+    GetPage(
       name: Routes.TEACHER_TAB, 
       page: () => TeacherMainTabPage(),
       binding: TeacherMainTabBinding()
@@ -32,6 +39,11 @@ class AppPages {
       name: Routes.TEACHER_ACTIVITY, 
       page: () => TeacherActivityPage(),
       binding: TeacherActivityBinding()
+    ),
+    GetPage(
+      name: Routes.TEACHER_ADD_ACTIVITY, 
+      page: () => TeacherAddActivityPage(),
+      binding: TeacherAddActivityBinding()
     ),
     GetPage(
       name: Routes.TEACHER_CHILDREN, 

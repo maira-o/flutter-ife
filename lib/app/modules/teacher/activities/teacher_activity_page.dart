@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:gauge_iot/app/routes/app_pages.dart';
 import 'package:gauge_iot/app/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'teacher_activity_controller.dart';
@@ -42,7 +43,7 @@ class TeacherActivityPage extends StatelessWidget {
 
   _addNewActivityButton() {
     return ElevatedButton.icon(
-      onPressed: () => print("apertou no botao de criar tarefa"), 
+      onPressed: () => Get.toNamed(Routes.TEACHER_ADD_ACTIVITY), 
       icon: Icon(Icons.add, color: AppColors.secondary900), 
       style: ElevatedButton.styleFrom(
         primary: AppColors.secondary100,

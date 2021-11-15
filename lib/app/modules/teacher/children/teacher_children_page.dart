@@ -35,13 +35,13 @@ class TeacherChildrenPage extends StatelessWidget {
     return ListView.builder(
       itemCount: 10,
       itemBuilder: (context, index) {
-        if (index == 0 ) return _addNewActivityButton();
+        if (index == 0 ) return _addNewChildButton();
         return _activityCell();
       },
     );
   }
 
-  _addNewActivityButton() {
+  _addNewChildButton() {
     return ElevatedButton.icon(
       onPressed: () => Get.toNamed(Routes.TEACHER_ADD_CHILD), 
       icon: Icon(Icons.add, color: AppColors.secondary900), 

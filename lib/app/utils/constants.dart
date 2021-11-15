@@ -25,3 +25,9 @@ class AppColors {
 
   static Color OnSurface = Colors.black.withAlpha(153);
 }
+
+class Assets {
+  static const String home_apoiador = "lib/app/utils/assets/home_apoiador.svg";
+  static const String home_crianca = "lib/app/utils/assets/home_crianca.svg";
+  static const String home_educador = "lib/app/utils/assets/home_educador.svg";
+}
