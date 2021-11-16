@@ -27,7 +27,7 @@ class AppColors {
 }
 
 class Assets {
-  static const String home_apoiador = "lib/app/utils/assets/home_apoiador.svg";
-  static const String home_crianca = "lib/app/utils/assets/home_crianca.svg";
-  static const String home_educador = "lib/app/utils/assets/home_educador.svg";
+  static const String home_apoiador = "lib/app/utils/assets/apoiador.png";
+  static const String home_crianca = "lib/app/utils/assets/crianca.png";
+  static const String home_educador = "lib/app/utils/assets/educador.png";
 }
