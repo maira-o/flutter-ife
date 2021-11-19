@@ -1,3 +1,10 @@
+import 'package:gauge_iot/app/modules/child/activities/activityDetail/child_activity_detail_binding.dart';
+import 'package:gauge_iot/app/modules/child/activities/activityDetail/child_activity_detail_page.dart';
+import 'package:gauge_iot/app/modules/child/activities/child_activity_binding.dart';
+import 'package:gauge_iot/app/modules/child/activities/child_activity_page.dart';
+import 'package:gauge_iot/app/modules/child/childHome/teacher_home_page.dart';
+import 'package:gauge_iot/app/modules/child/mainTab/child_main_tab_binding.dart';
+import 'package:gauge_iot/app/modules/child/mainTab/child_main_tab_page.dart';
 import 'package:gauge_iot/app/modules/landing/landing_binding.dart';
 import 'package:gauge_iot/app/modules/landing/landing_page.dart';
 import 'package:gauge_iot/app/modules/teacher/activities/addActivity/teacher_addActivity_binding.dart';
@@ -55,7 +62,27 @@ class AppPages {
       page: () => TeacherAddChildPage(),
       binding: TeacherAddChildBinding()
     ),
+
     // CHILD PAGES
+    GetPage(
+      name: Routes.CHILD_TAB, 
+      page: () => ChildMainTabPage(),
+      binding: ChildMainTabBinding()
+    ),
+    GetPage(
+      name: Routes.CHILD_HOME, 
+      page: () => ChildHomePage(),
+    ),
+    GetPage(
+      name: Routes.CHILD_ACTIVITIES, 
+      page: () => ChildActivityPage(),
+      binding: ChildActivityBinding()
+    ),
+    GetPage(
+      name: Routes.CHILD_ACTIVITY_DETAIL, 
+      page: () => ChildActivityDetailPage(),
+      binding: ChildActivityDetailBinding()
+    ),
 
     // SUPPORTER PAGES
   ];

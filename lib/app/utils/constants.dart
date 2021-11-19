@@ -1,4 +1,14 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
+extension MarcaoPackage on Widget {
+  onTap(VoidCallback callback) {
+    return GestureDetector(
+      child: this,
+      onTap: callback
+    );
+  }
+}
 
 class AppColors { 
   static Color primary = Color(0xFFFF9766); 

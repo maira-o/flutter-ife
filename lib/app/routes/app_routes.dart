@@ -14,6 +14,10 @@ abstract class Routes {
   static const TEACHER_ADD_CHILD = '/teacher/children/add';
 
   // CHILD ROUTES
+  static const CHILD_TAB = '/child/tab';
+  static const CHILD_HOME = '/child/home';
+  static const CHILD_ACTIVITIES = '/child/activity';
+  static const CHILD_ACTIVITY_DETAIL = '/child/activity/detail';
 
   // SUPPORTER ROUTES
 }
