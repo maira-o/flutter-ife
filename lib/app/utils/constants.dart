@@ -40,4 +40,9 @@ class Assets {
   static const String home_apoiador = "lib/app/utils/assets/apoiador.png";
   static const String home_crianca = "lib/app/utils/assets/crianca.png";
   static const String home_educador = "lib/app/utils/assets/educador.png";
+  static const String book_heart = "lib/app/utils/assets/book_heart.png";
+}
+
+class StorageValues {
+  static const String loginToken = "loginToken";
 }

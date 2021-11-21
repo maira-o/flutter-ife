@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 void main() {
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: Routes.CHILD_TAB,
+    initialRoute: Routes.LANDING,
     theme: appThemeData,
     defaultTransition: Transition.fade,
     getPages: AppPages.pages,
