@@ -9,6 +9,8 @@ class TeacherProvider {
   Future<ActivityResponse?> getActivities(String userId) async {
     http.Response response = await GenericProvider.getRequest(EndPointConstants.getActivities(userId));
 
+    print("getActivities statuscode: ${response.statusCode}");
+
     // Handle response parsing
     if (response.statusCode == 200) {
       // Usar um desses dois
@@ -22,10 +24,10 @@ class TeacherProvider {
     // Build JSON body
     Map data = activityBody.toJson();
 
-    print("activity to json $data");
-
     // Call post function and wait for response
     http.Response response = await GenericProvider.postRequest(EndPointConstants.createActivity, data);
+
+    print("addActivity statuscode: ${response.statusCode}");
 
     // Handle response parsing
     if (response.statusCode == 200) {

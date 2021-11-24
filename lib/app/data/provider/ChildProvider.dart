@@ -10,6 +10,8 @@ class ChildProvider {
     Future<ChildResponse?> getChildren(String userId) async {
     http.Response response = await GenericProvider.getRequest(EndPointConstants.getChildrenByEducator(userId));
 
+    print("getChildren statuscode: ${response.statusCode}");
+
     // Handle response parsing
     if (response.statusCode == 200) {
       // Usar um desses dois

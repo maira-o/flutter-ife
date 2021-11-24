@@ -4,6 +4,7 @@ import 'package:gauge_iot/app/data/model/User.dart';
 import 'package:gauge_iot/app/data/model/shared_preferences_manager.dart';
 import 'package:gauge_iot/app/data/provider/ChildProvider.dart';
 import 'package:gauge_iot/app/data/provider/TeacherProvider.dart';
+import 'package:gauge_iot/app/modules/teacher/activities/teacher_activity_controller.dart';
 import 'package:get/get.dart';
 
 class SelectableChild {
@@ -64,17 +65,19 @@ class TeacherAddActivityController extends GetxController {
   addChild(Function(bool) closure) async {
     List<String> childrenIds = selectableChild.map((element) => element.id).toList();
 
+    print("childrensids: $childrenIds");
+
     ActivityBody activityBody = ActivityBody(
       titulo: activityTitle, 
       descricao: activityDescription, 
-      criancas: ["618b1d97685157f438f4a198", "618fe2c4291905ff68e07bfc"]
+      criancas: childrenIds
     );
 
     bool postActivity = await TeacherProvider().addActivity(activityBody);
 
     print("deu certo o post? $postActivity");
+    TeacherActivityController activityController = Get.find<TeacherActivityController>();
+    activityController.load();
     closure(postActivity);
-
-    return postActivity;
   }
 }

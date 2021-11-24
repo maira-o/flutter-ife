@@ -35,7 +35,10 @@ class TeacherChildrenPage extends GetView<TeacherChildrenController> {
     return Styled.widget(
       child: Container(
         height: MediaQuery.of(context).size.height,
-        child: _listView()
+        child: RefreshIndicator(
+          onRefresh: () => controller.load(),
+          child: _listView(),
+        )
       )
     ).padding(top: 16, left: 16, right: 16);
   }

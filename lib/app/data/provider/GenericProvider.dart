@@ -39,9 +39,6 @@ class GenericProvider {
       body: jsonEncode(data)
     );
 
-    print("token: " + token);
-    print("user id:" + userid);
-
     return response;
   }
 

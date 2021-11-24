@@ -16,7 +16,7 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
       ),
       extendBody: true,
       body: GetX<TeacherAddActivityController>(
-            init: controller.init(),
+            initState: controller.init(),
             builder: (_) {
               return _.isLoading
               ? Center(child: CircularProgressIndicator())

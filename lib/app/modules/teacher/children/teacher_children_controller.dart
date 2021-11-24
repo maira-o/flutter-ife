@@ -12,7 +12,7 @@ class TeacherChildrenController extends GetxController {
   RxList<CriancaElement> children = <CriancaElement>[].obs;
 
   init() {
-    load();
+    // load();
   }
 
   Future<void> load() async {
