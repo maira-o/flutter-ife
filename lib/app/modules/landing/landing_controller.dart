@@ -49,8 +49,6 @@ class LandingController extends GetxController {
     isLoading = false;
 
     if (login != null) {
-      print("*******, " + login.token);
-      print("*******, " + login.message);
       bool saveUser = await SharedPreferencesManager.saveUser(login.usuario);
       SensitiveStorage().writeValue(StorageValues.loginToken, login.token);
 

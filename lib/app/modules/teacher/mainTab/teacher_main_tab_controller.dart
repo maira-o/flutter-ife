@@ -11,15 +11,6 @@ class TeacherMainTabController extends GetxController {
   get selectedIndex => this._selectedIndex.value;
   set selectedIndex(index) => this._selectedIndex.value = index;
 
-  TeacherMainTabController() {
-    _printToken();
-  }
-
-  _printToken() async {
-    String token = await SensitiveStorage().readValue(StorageValues.loginToken);
-    print("TOKEN NO SENSITIVE STORAGE: " + token);
-  }
-
   final List<Widget> pagesList = [
     TeacherHomePage(),
 

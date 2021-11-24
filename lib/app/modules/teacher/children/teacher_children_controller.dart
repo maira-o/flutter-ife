@@ -17,11 +17,8 @@ class TeacherChildrenController extends GetxController {
 
   Future<void> load() async {
     isLoading = true;
-    print("isLoading");
     Usuario? user = await SharedPreferencesManager.getUser();
     var childResponse = await ChildProvider().getChildren(user?.id ?? "");
-    print("user id: ${user?.id}");
-    print("response children: $childResponse");
     children.value = childResponse?.criancas ?? [];
     isLoading = false;
   }

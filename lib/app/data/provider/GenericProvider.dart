@@ -10,7 +10,8 @@ class GenericProvider {
   /// Given a URL.
   static Future<http.Response> getRequest(String url) async {
     var response = await http.get(Uri.parse(url), headers: {
-      "token": '${await SensitiveStorage().readValue(StorageValues.loginToken)}'
+      "token": '${await SensitiveStorage().readValue(StorageValues.loginToken)}',
+      "userid": '${await SharedPreferencesManager.getUserId()}'
     });
 
     return response;
@@ -25,15 +26,23 @@ class GenericProvider {
   // }
 
   static Future<http.Response> postRequest(String url, Map data) async {
-    return http.post(
+    String token = await SensitiveStorage().readValue(StorageValues.loginToken);
+    String userid = await SharedPreferencesManager.getUserId() ?? "";
+
+    var response = http.post(
       Uri.parse(url),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        "token": '${await SensitiveStorage().readValue(StorageValues.loginToken)}',
-        "userid": '${await SharedPreferencesManager.getUserId()}'
+        "token": token,
+        "userid": userid
       },
       body: jsonEncode(data)
     );
+
+    print("token: " + token);
+    print("user id:" + userid);
+
+    return response;
   }
 
 
@@ -41,7 +50,8 @@ class GenericProvider {
   /// Given a URL and a JSON format for body call.
   static Future<http.Response> deleteRequest(String url) async {
     var response = await http.delete(Uri.parse(url), headers: {
-
+        "token": '${await SensitiveStorage().readValue(StorageValues.loginToken)}',
+        "userid": '${await SharedPreferencesManager.getUserId()}'
     });
     
     return response;

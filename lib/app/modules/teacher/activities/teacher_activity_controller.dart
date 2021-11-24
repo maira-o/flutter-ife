@@ -17,11 +17,8 @@ class TeacherActivityController extends GetxController {
 
   Future<void> load() async {
     isLoading = true;
-    print("isLoading");
     Usuario? user = await SharedPreferencesManager.getUser();
     var activitiesResponse = await TeacherProvider().getActivities(user?.id ?? "");
-    print("user id: ${user?.id}");
-    print("response activity: $activitiesResponse");
     activities.value = activitiesResponse?.atividades ?? [];
     isLoading = false;
   }

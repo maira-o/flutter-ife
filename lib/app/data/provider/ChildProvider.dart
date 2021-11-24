@@ -16,7 +16,6 @@ class ChildProvider {
       return ChildResponse.fromRawJson(response.body);
       // return ChildResponse.fromJson(jsonDecode(response.body));
     } else {
-      print(response.statusCode);
       return null;
     }
   }

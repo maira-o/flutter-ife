@@ -78,7 +78,7 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
         border: OutlineInputBorder()
       ),
       onChanged: (text) {
-        controller.activityDescription = text;
+        controller.activityTitle = text;
         controller.validateForm();
       }
     );
@@ -136,7 +136,7 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
   _button(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        if (controller.isFormValid) {
+        if (!controller.isFormValid) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 backgroundColor: Colors.red,

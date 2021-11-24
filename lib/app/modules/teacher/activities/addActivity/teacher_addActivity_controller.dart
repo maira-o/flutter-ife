@@ -67,7 +67,7 @@ class TeacherAddActivityController extends GetxController {
     ActivityBody activityBody = ActivityBody(
       titulo: activityTitle, 
       descricao: activityDescription, 
-      criancas: childrenIds
+      criancas: ["618b1d97685157f438f4a198", "618fe2c4291905ff68e07bfc"]
     );
 
     bool postActivity = await TeacherProvider().addActivity(activityBody);

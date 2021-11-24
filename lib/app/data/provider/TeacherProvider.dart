@@ -22,6 +22,8 @@ class TeacherProvider {
     // Build JSON body
     Map data = activityBody.toJson();
 
+    print("activity to json $data");
+
     // Call post function and wait for response
     http.Response response = await GenericProvider.postRequest(EndPointConstants.createActivity, data);
 
@@ -29,7 +31,7 @@ class TeacherProvider {
     if (response.statusCode == 200) {
       return true;
     } else {
-      print("addActivity statuscode: ${response.statusCode}");
+      print(response.statusCode);
       return false;
     }
   }
