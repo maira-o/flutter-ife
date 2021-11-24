@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:gauge_iot/app/data/model/Activity.dart';
 import 'package:gauge_iot/app/routes/app_pages.dart';
 import 'package:gauge_iot/app/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +8,7 @@ import 'teacher_activity_controller.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:get/get.dart';
 
-class TeacherActivityPage extends StatelessWidget {
+class TeacherActivityPage extends GetView<TeacherActivityController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +19,14 @@ class TeacherActivityPage extends StatelessWidget {
         backgroundColor: AppColors.primary
       ),
       extendBody: true,
-      body: _body(context),
+      body: GetX<TeacherActivityController>(
+        initState: controller.init(),
+        builder: (_) {
+          return _.isLoading
+          ? Center(child: CircularProgressIndicator())
+          : _body(context);
+        }
+      ),
     );
   }
 
@@ -33,10 +41,10 @@ class TeacherActivityPage extends StatelessWidget {
 
   _listView() {
     return ListView.builder(
-      itemCount: 10,
+      itemCount: controller.activities.length + 1,
       itemBuilder: (context, index) {
         if (index == 0 ) return _addNewActivityButton();
-        return _activityCell();
+        return _activityCell(controller.activities[index - 1]);
       },
     );
   }
@@ -57,18 +65,18 @@ class TeacherActivityPage extends StatelessWidget {
     ).padding(left: 16, right: 16, bottom: 16);
   }
 
-  _activityCell() {
+  _activityCell(Activity activity) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("DATA DE INSERÇÃO")
+        Text(activity.createAt.toString())
         .textColor(AppColors.primary900)
         .fontSize(10)
         .letterSpacing(1.5),
-        Text("Título da Atividade")
+        Text(activity.titulo)
         .textColor(AppColors.secondary300)
         .fontSize(16),
-        Text("Início do texto de descrição...")
+        Text(activity.descricao, maxLines: 1)
         .textColor(AppColors.OnSurface)
         .fontSize(14),
         Divider(

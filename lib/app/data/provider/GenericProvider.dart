@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:gauge_iot/app/data/model/shared_preferences_manager.dart';
+import 'package:gauge_iot/app/data/provider/Storage.dart';
+import 'package:gauge_iot/app/utils/constants.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
@@ -7,7 +10,7 @@ class GenericProvider {
   /// Given a URL.
   static Future<http.Response> getRequest(String url) async {
     var response = await http.get(Uri.parse(url), headers: {
-      // "Cookie": '${await TokenManager.getJwtToken()}',
+      "token": '${await SensitiveStorage().readValue(StorageValues.loginToken)}'
     });
 
     return response;
@@ -26,6 +29,8 @@ class GenericProvider {
       Uri.parse(url),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        "token": '${await SensitiveStorage().readValue(StorageValues.loginToken)}',
+        "userid": '${await SharedPreferencesManager.getUserId()}'
       },
       body: jsonEncode(data)
     );

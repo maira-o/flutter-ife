@@ -13,7 +13,6 @@ class TeacherProvider {
     if (response.statusCode == 200) {
       // Usar um desses dois
       return ActivityResponse.fromRawJson(response.body);
-      // return ActivityResponse.fromJson(jsonDecode(response.body));
     } else {
       return null;
     }
@@ -30,6 +29,7 @@ class TeacherProvider {
     if (response.statusCode == 200) {
       return true;
     } else {
+      print("addActivity statuscode: ${response.statusCode}");
       return false;
     }
   }

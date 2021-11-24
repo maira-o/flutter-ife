@@ -18,7 +18,9 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
       body: GetX<TeacherAddActivityController>(
             init: controller.init(),
             builder: (_) {
-              return _body(context);
+              return _.isLoading
+              ? Center(child: CircularProgressIndicator())
+              : _body(context);
             },
           ),
     );
@@ -29,7 +31,7 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
       children: [
         _form(context),
         SizedBox(height: 24),
-        _button(),
+        _button(context),
       ],
     ).padding(vertical: 30, horizontal: 16);
   }
@@ -75,6 +77,10 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
         ),
         border: OutlineInputBorder()
       ),
+      onChanged: (text) {
+        controller.activityDescription = text;
+        controller.validateForm();
+      }
     );
   }
 
@@ -97,6 +103,10 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
         ),
         border: OutlineInputBorder()
       ),
+      onChanged: (text) {
+        controller.activityDescription = text;
+        controller.validateForm();
+      }
     );
   }
 
@@ -112,20 +122,47 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
           new CheckboxListTile(
             contentPadding: EdgeInsets.symmetric(),
             activeColor: AppColors.primary,
-            title: Text(controller.children[i].name)
+            title: Text(controller.selectableChild[i].name)
               .textColor(AppColors.OnSurface)
               .fontSize(14),
             controlAffinity: ListTileControlAffinity.trailing,
-            value: controller.children[i].isSelected.value,
+            value: controller.selectableChild[i].isSelected.value,
             onChanged: (value) => controller.selectChild(i, value ?? false)
           )
       ]
     );
   }
 
-  _button() {
+  _button(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => print("apertou no botao de adicionar atividade"), 
+      onPressed: () {
+        if (controller.isFormValid) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Colors.red,
+                content: Text("Complete o form para continuar")
+                            .fontSize(24)
+                            .fontWeight(FontWeight.bold)
+                            
+              )
+            );
+        } else {
+          controller.addChild((success) {
+            if (success) {
+              Get.back();
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Colors.red,
+                  content: Text("Ocorreu Algum erro")
+                            .fontSize(24)
+                            .fontWeight(FontWeight.bold)
+                )
+              );
+            }
+          });
+        }
+      }, 
       style: ElevatedButton.styleFrom(
         primary: AppColors.primary,
         shape: RoundedRectangleBorder(

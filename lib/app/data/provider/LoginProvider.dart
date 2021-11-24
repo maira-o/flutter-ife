@@ -22,7 +22,6 @@ class LoginProvider {
       // return LoginResponse.fromJson(jsonDecode(response.body));
       return LoginResponse.fromRawJson(response.body);
     } else {
-      print(response.statusCode);
       return null;
     }
   }

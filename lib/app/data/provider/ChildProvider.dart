@@ -7,7 +7,7 @@ import '../endpoints_constants.dart';
 import 'GenericProvider.dart';
 
 class ChildProvider {
-    Future<ChildResponse?> getActivities(String userId) async {
+    Future<ChildResponse?> getChildren(String userId) async {
     http.Response response = await GenericProvider.getRequest(EndPointConstants.getChildrenByEducator(userId));
 
     // Handle response parsing
@@ -16,6 +16,7 @@ class ChildProvider {
       return ChildResponse.fromRawJson(response.body);
       // return ChildResponse.fromJson(jsonDecode(response.body));
     } else {
+      print(response.statusCode);
       return null;
     }
   }

@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:gauge_iot/app/data/model/LoginResponse.dart';
+import 'package:gauge_iot/app/data/model/shared_preferences_manager.dart';
 import 'package:gauge_iot/app/data/provider/LoginProvider.dart';
 import 'package:gauge_iot/app/data/provider/Storage.dart';
 import 'package:gauge_iot/app/utils/constants.dart';
@@ -36,7 +37,11 @@ class LandingController extends GetxController {
     }
   }
 
-  login(VoidCallback closure) async {
+  login(Function(int) closure) async {
+    // SharedPreferencesManager.
+    SensitiveStorage().deleteAll();
+    bool deleteUser = await SharedPreferencesManager.deleteUser();
+    
     isLoading = true;
 
     LoginResponse? login = await LoginProvider().postLogin(email, password);
@@ -46,9 +51,10 @@ class LandingController extends GetxController {
     if (login != null) {
       print("*******, " + login.token);
       print("*******, " + login.message);
+      bool saveUser = await SharedPreferencesManager.saveUser(login.usuario);
       SensitiveStorage().writeValue(StorageValues.loginToken, login.token);
 
-      closure();
+      closure(login.usuario.papel);
     } else {
       print("erro no login");
     }

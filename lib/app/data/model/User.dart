@@ -1,39 +1,37 @@
-class TeacherUser {
+import 'dart:convert';
+
+class Usuario {
+    Usuario({
+        required this.nome,
+        required this.email,
+        required this.papel,
+        required this.createAt,
+        required this.id,
+    });
+
     String nome;
     String email;
-    String senha;
-    String confirmaSenha;
     int papel;
+    DateTime createAt;
+    String id;
 
-    TeacherUser(this.nome, this.email, this.senha, this.confirmaSenha, this.papel);
-}
+    factory Usuario.fromRawJson(String str) => Usuario.fromJson(json.decode(str));
 
-class ChildUser {
-    String nome;
-    String email;
-    String senha;
-    String confirmaSenha;
-    int papel;
-    String dt_nasc;
-    String ano_escolar;
-    String cidade;
-    String uf;
-    String telefone;
-    String observacoes;
-    int nivel_leitura;
+    String toRawJson() => json.encode(toJson());
 
-    ChildUser(
-      this.nome, 
-      this.email, 
-      this.senha, 
-      this.confirmaSenha, 
-      this.papel,
-      this.dt_nasc,
-      this.ano_escolar,
-      this.cidade,
-      this.uf,
-      this.telefone,
-      this.observacoes,
-      this.nivel_leitura
+    factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
+        nome: json["nome"],
+        email: json["email"],
+        papel: json["papel"],
+        createAt: DateTime.parse(json["createAt"]),
+        id: json["_id"],
     );
+
+    Map<String, dynamic> toJson() => {
+        "nome": nome,
+        "email": email,
+        "papel": papel,
+        "createAt": createAt.toIso8601String(),
+        "_id": id,
+    };
 }

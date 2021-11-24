@@ -137,8 +137,12 @@ class LandingPage extends GetView<LandingController> {
 
   _button() {
     return ElevatedButton(
-      onPressed: () => controller.login(() { 
-        controller.isFormValid ? Get.toNamed(Routes.TEACHER_TAB) : null ;
+      onPressed: () => controller.login((papel) { 
+        if (papel == 1) {
+          controller.isFormValid ? Get.toNamed(Routes.TEACHER_TAB) : null ;
+        } else if (papel == 2) {
+          controller.isFormValid ? Get.toNamed(Routes.CHILD_TAB) : null ;
+        }
       }), 
       style: ElevatedButton.styleFrom(
         primary: controller.isFormValid ? AppColors.primary : Colors.black38,
