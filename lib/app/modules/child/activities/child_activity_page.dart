@@ -1,13 +1,15 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:gauge_iot/app/data/model/Activity.dart';
 import 'package:gauge_iot/app/routes/app_pages.dart';
 import 'package:gauge_iot/app/utils/constants.dart';
+import 'package:gauge_iot/app/utils/date_parser.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'child_activity_controller.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:get/get.dart';
 
-class ChildActivityPage extends StatelessWidget {
+class ChildActivityPage extends GetView<ChildActivityController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +20,14 @@ class ChildActivityPage extends StatelessWidget {
         backgroundColor: AppColors.primary
       ),
       extendBody: true,
-      body: _body(context),
+      body: GetX<ChildActivityController>(
+        initState: controller.init(),
+        builder: (_) {
+          return _.isLoading
+          ? Center(child: CircularProgressIndicator())
+          : _body(context);
+        },
+      ),
     );
   }
 
@@ -26,17 +35,20 @@ class ChildActivityPage extends StatelessWidget {
     return Styled.widget(
       child: Container(
         height: MediaQuery.of(context).size.height,
-        child: _listView(context)
+        child: RefreshIndicator(
+          onRefresh: () => controller.load(),
+          child: _listView(context),
+        )
       )
     ).padding(top: 16, left: 16, right: 16);
   }
 
   _listView(BuildContext context) {
     return ListView.builder(
-      itemCount: 10,
+      itemCount: controller.activities.length + 1,
       itemBuilder: (context, index) {
         if (index == 0 ) return _imageView(context);
-        return _activityCell();
+        return _activityCell(controller.activities[index - 1]);
       },
     );
   }
@@ -50,18 +62,18 @@ class ChildActivityPage extends StatelessWidget {
     .center();
   }
 
-  _activityCell() {
+  _activityCell(Activity activity) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("DATA DE INSERÇÃO")
+        Text(DateParser.convertToDate(activity.createAt.toString()))
         .textColor(AppColors.primary900)
         .fontSize(10)
         .letterSpacing(1.5),
-        Text("Titulo da atividade")
+        Text(activity.titulo)
         .textColor(AppColors.secondary300)
         .fontSize(16),
-        Text("Inicio do texto de descrição")
+        Text(activity.descricao, maxLines: 1)
         .textColor(AppColors.OnSurface)
         .fontSize(14),
         Divider(
@@ -70,7 +82,7 @@ class ChildActivityPage extends StatelessWidget {
       ],
     )
     .onTap(() { 
-      Get.toNamed(Routes.CHILD_ACTIVITY_DETAIL);
+      Get.toNamed(Routes.CHILD_ACTIVITY_DETAIL, arguments: activity);
     });
   }
 }

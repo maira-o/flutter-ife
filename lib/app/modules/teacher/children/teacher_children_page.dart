@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gauge_iot/app/data/model/Child.dart';
 import 'package:gauge_iot/app/routes/app_pages.dart';
 import 'package:gauge_iot/app/utils/constants.dart';
+import 'package:gauge_iot/app/utils/date_parser.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'teacher_children_controller.dart';
 import 'package:styled_widget/styled_widget.dart';
@@ -74,7 +75,7 @@ class TeacherChildrenPage extends GetView<TeacherChildrenController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(child.createAt.toString())
+        Text(DateParser.convertToDate(child.createAt.toString()))
         .textColor(AppColors.primary900)
         .fontSize(10)
         .letterSpacing(1.5),

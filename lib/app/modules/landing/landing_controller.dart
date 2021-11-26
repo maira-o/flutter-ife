@@ -1,8 +1,11 @@
+import 'dart:developer';
 import 'dart:ui';
 import 'package:gauge_iot/app/data/model/LoginResponse.dart';
+import 'package:gauge_iot/app/data/model/UserFull.dart';
 import 'package:gauge_iot/app/data/model/shared_preferences_manager.dart';
 import 'package:gauge_iot/app/data/provider/LoginProvider.dart';
 import 'package:gauge_iot/app/data/provider/Storage.dart';
+import 'package:gauge_iot/app/data/provider/UserProvider.dart';
 import 'package:gauge_iot/app/utils/constants.dart';
 import 'package:get/get.dart';
 
@@ -41,6 +44,7 @@ class LandingController extends GetxController {
     // SharedPreferencesManager.
     SensitiveStorage().deleteAll();
     bool deleteUser = await SharedPreferencesManager.deleteUser();
+    bool deleteTeacherkey = await SharedPreferencesManager.deleteTeacherKey();
     
     isLoading = true;
 
@@ -51,6 +55,16 @@ class LandingController extends GetxController {
     if (login != null) {
       bool saveUser = await SharedPreferencesManager.saveUser(login.usuario);
       SensitiveStorage().writeValue(StorageValues.loginToken, login.token);
+
+      if (login.usuario.papel == 2) {
+        UserFull? userFull = await UserProvider().getUserFull(login.usuario.id);
+
+        if (userFull != null) {
+          bool saveTeacherId = await SharedPreferencesManager.saveTeacherKey(userFull.usuario.crianca.educador);
+
+          print("sucesso em salvar teacher key: $saveTeacherId");
+        }
+      }
 
       closure(login.usuario.papel);
     } else {

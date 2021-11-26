@@ -6,6 +6,7 @@ class SharedPreferencesManager {
   // Private Properties
   
   static String _userKey = 'userDataKey';
+  static String _childTeacherKey = 'childTeacherKey';
 
   // Public Methods
 
@@ -36,5 +37,24 @@ class SharedPreferencesManager {
   static Future<bool> deleteUser() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return sharedPreferences.remove(_userKey);
+  }
+
+  static Future<String?> getChildTeacherId() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? teacherKey = sharedPreferences.getString(_childTeacherKey);
+
+    if (teacherKey == null) return null;
+    
+    return teacherKey;
+  }
+
+  static Future<bool> saveTeacherKey(String teacherKey) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.setString(_childTeacherKey, teacherKey);
+  }
+
+  static Future<bool> deleteTeacherKey() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.remove(_childTeacherKey);
   }
 }

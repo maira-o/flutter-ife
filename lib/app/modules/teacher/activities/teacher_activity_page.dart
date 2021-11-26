@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gauge_iot/app/data/model/Activity.dart';
 import 'package:gauge_iot/app/routes/app_pages.dart';
 import 'package:gauge_iot/app/utils/constants.dart';
+import 'package:gauge_iot/app/utils/date_parser.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'teacher_activity_controller.dart';
 import 'package:styled_widget/styled_widget.dart';
@@ -73,7 +74,7 @@ class TeacherActivityPage extends GetView<TeacherActivityController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(activity.createAt.toString())
+        Text(DateParser.convertToDate(activity.createAt.toString()))
         .textColor(AppColors.primary900)
         .fontSize(10)
         .letterSpacing(1.5),

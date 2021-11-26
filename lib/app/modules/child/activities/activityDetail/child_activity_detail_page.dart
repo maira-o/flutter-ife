@@ -6,7 +6,7 @@ import 'child_activity_detail_controller.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:get/get.dart';
 
-class ChildActivityDetailPage extends StatelessWidget {
+class ChildActivityDetailPage extends GetView<ChildActivityDetailController> {
   const ChildActivityDetailPage({Key? key}) : super(key: key);
 
   @override
@@ -35,13 +35,13 @@ class ChildActivityDetailPage extends StatelessWidget {
   _body(BuildContext context) {
     return Column(
       children: [
-        Text("Lanceirinho Negro")
+        Text(controller.title)
         .textColor(AppColors.secondary300)
         .fontSize(24),
-        Text("30/09/2021")
+        Text(controller.date)
         .textColor(AppColors.primary900)
         .fontSize(16),
-        Text("Olá,\n\neu amei o nosso e encontro e você gostou? Falamos sobre o livro ‘Lanceirinho Negro’ e assitimos o vídeo sobre o livro. \n\nAssista de novo o vídeo:\n\n https://youtube.com/video-lanceirinho")
+        Text(controller.description)
         .fontSize(16),
       ],
     ).padding(vertical: 30, horizontal: 16);

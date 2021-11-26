@@ -9,10 +9,15 @@ class GenericProvider {
   /// Function that sends a CRUD GET request.
   /// Given a URL.
   static Future<http.Response> getRequest(String url) async {
+    String token = await SensitiveStorage().readValue(StorageValues.loginToken);
+    String? userId = await SharedPreferencesManager.getUserId();
     var response = await http.get(Uri.parse(url), headers: {
       "token": '${await SensitiveStorage().readValue(StorageValues.loginToken)}',
       "userid": '${await SharedPreferencesManager.getUserId()}'
     });
+
+    print("Token $token");
+    print("User id $userId");
 
     return response;
   }
