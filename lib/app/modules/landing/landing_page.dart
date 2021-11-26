@@ -59,6 +59,10 @@ class LandingPage extends GetView<LandingController> {
         SizedBox(height: 8),
         _ifeSubtitle(),
         SizedBox(height: 80),
+        _goToApoiadorFlow(),
+        SizedBox(height: 16),
+        _orLoginLabel(),
+        SizedBox(height: 16),
         _emailTextField(),
         SizedBox(height: 16),
         _passwordTextField(),
@@ -90,6 +94,32 @@ class LandingPage extends GetView<LandingController> {
 
   _ifeSubtitle() {
     return Text("Um aplicativo de apoio à leitura infantil inclusiva")
+        .textAlignment(TextAlign.center)
+        .textColor(AppColors.secondary400)
+        .fontSize(20);
+  }
+  
+  _goToApoiadorFlow() {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        primary: AppColors.secondary100,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
+        )
+      ),
+      onPressed: () {
+        Get.offAllNamed(Routes.SUPPORTER_TAB);
+      },
+      child: Text("acesse a área do apoiador".toUpperCase())
+              .textColor(AppColors.secondary900)
+              .padding(vertical: 10)
+    )
+    .width(double.infinity);
+    // .elevation(3);
+  }
+
+  _orLoginLabel() {
+    return Text("ou faça login:")
         .textAlignment(TextAlign.center)
         .textColor(AppColors.secondary400)
         .fontSize(20);
@@ -140,9 +170,9 @@ class LandingPage extends GetView<LandingController> {
     return ElevatedButton(
       onPressed: () => controller.isFormValid ? controller.login((papel) { 
         if (papel == 1) {
-          Get.toNamed(Routes.TEACHER_TAB);
+          Get.offAllNamed(Routes.TEACHER_TAB);
         } else if (papel == 2) {
-          Get.toNamed(Routes.CHILD_TAB);
+          Get.offAllNamed(Routes.CHILD_TAB);
         }
       }) : null, 
       style: ElevatedButton.styleFrom(

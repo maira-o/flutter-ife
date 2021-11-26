@@ -1,11 +1,15 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:gauge_iot/app/data/model/Activity.dart';
+import 'package:gauge_iot/app/routes/app_pages.dart';
 import 'package:gauge_iot/app/utils/constants.dart';
 import 'package:gauge_iot/app/utils/date_parser.dart';
-import 'teacher_support_controller.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'support_controller.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:get/get.dart';
 
-class TeacherSupportPage extends GetView<TeacherSupportController> {
+class SupportPage extends GetView<SupportController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,13 +20,13 @@ class TeacherSupportPage extends GetView<TeacherSupportController> {
         backgroundColor: AppColors.primary
       ),
       extendBody: true,
-      body: GetX<TeacherSupportController>(
+      body: GetX<SupportController>(
         initState: controller.init(),
         builder: (_) {
           return _.isLoading
           ? Center(child: CircularProgressIndicator())
           : _body(context);
-        }
+        },
       ),
     );
   }
@@ -33,35 +37,29 @@ class TeacherSupportPage extends GetView<TeacherSupportController> {
         height: MediaQuery.of(context).size.height,
         child: RefreshIndicator(
           onRefresh: () => controller.load(),
-          child: _listView(),
+          child: _listView(context),
         )
       )
+    ).padding(top: 16, left: 16, right: 16);
+  }
+
+  _listView(BuildContext context) {
+    return ListView.builder(
+      itemCount: controller.supports.length + 1,
+      itemBuilder: (context, index) {
+        if (index == 0 ) return _imageView(context);
+        return _activityCell(index - 1);
+      },
     );
   }
 
-  _listView() {
-    return ListView.builder(
-      itemCount: controller.supports.length,
-      itemBuilder: (context, index) {
-        return Dismissible(
-          direction: DismissDirection.endToStart,
-          key: UniqueKey(), 
-          child: _activityCell(index)
-                  .padding(top: 16, left: 16),
-          onDismissed: (_) {
-            controller.deleteSupport(index);
-          },
-          background: Container(
-            color: Colors.red,
-            alignment: Alignment.centerRight,
-            child: Icon(
-              Icons.delete,
-              color: Colors.white,
-            ),
-          ),
-        );
-      },
-    );
+  _imageView(BuildContext context) {
+    return SizedBox(
+      child: Image.asset(Assets.home_crianca),
+      width: MediaQuery.of(context).size.width * 0.8,
+      height: MediaQuery.of(context).size.width * 0.8
+    )
+    .center();
   }
 
   Widget _activityCell(int index) {
@@ -82,6 +80,12 @@ class TeacherSupportPage extends GetView<TeacherSupportController> {
           color: Colors.grey
         )
       ],
-    );
+    )
+    .onTap(() { 
+      Get.toNamed(
+        Routes.SUPPORT_DETAIL, 
+        arguments: [controller.supports[index], controller.children[index]]
+      );
+    });
   }
 }

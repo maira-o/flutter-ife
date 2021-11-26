@@ -33,17 +33,25 @@ class ChildActivityDetailPage extends GetView<ChildActivityDetailController> {
   }
 
   _body(BuildContext context) {
-    return Column(
+    return Row(
       children: [
-        Text(controller.title)
-        .textColor(AppColors.secondary300)
-        .fontSize(24),
-        Text(controller.date)
-        .textColor(AppColors.primary900)
-        .fontSize(16),
-        Text(controller.description)
-        .fontSize(16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(controller.title)
+              .textColor(AppColors.secondary300)
+              .fontSize(24),
+              Text(controller.date)
+              .textColor(AppColors.primary900)
+              .fontSize(16),
+              Text(controller.description)
+              .fontSize(16),
+            ],
+          )
+          .padding(vertical: 30, horizontal: 16),
+        )
       ],
-    ).padding(vertical: 30, horizontal: 16);
+    );
   }
 }

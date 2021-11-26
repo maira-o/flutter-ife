@@ -20,4 +20,8 @@ abstract class Routes {
   static const CHILD_ACTIVITY_DETAIL = '/child/activity/detail';
 
   // SUPPORTER ROUTES
+  static const SUPPORTER_TAB = '/supporter/tab';
+  static const SUPPORTER_HOME = '/supporter/home';
+  static const SUPPORTER_SUPPORTS = '/supporter/supports';
+  static const SUPPORT_DETAIL = '/supporter/supports/detail';
 }
