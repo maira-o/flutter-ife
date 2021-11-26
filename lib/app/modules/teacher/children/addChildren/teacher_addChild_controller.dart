@@ -1,7 +1,9 @@
 import 'package:gauge_iot/app/data/model/Child.dart';
 import 'package:gauge_iot/app/data/model/ChildUserBody.dart';
+import 'package:gauge_iot/app/data/model/Support/SupportBody.dart';
 import 'package:gauge_iot/app/data/model/User.dart';
-import 'package:gauge_iot/app/data/model/shared_preferences_manager.dart';
+import 'package:gauge_iot/app/data/model/SharedPreferencesManager.dart';
+import 'package:gauge_iot/app/data/model/UserFull.dart';
 import 'package:gauge_iot/app/data/provider/ChildProvider.dart';
 import 'package:gauge_iot/app/data/provider/UserProvider.dart';
 import 'package:gauge_iot/app/modules/teacher/children/teacher_children_controller.dart';
@@ -58,6 +60,12 @@ class TeacherAddChildController extends GetxController {
   String observacoes = "";
   int nivelLeitura = 0;
 
+  // Support variables
+  double valor = 0;
+  String pix = "";
+  String supportTelefone = "";
+  String livro = "";
+
   validateForm() {
     if (email == "" || senha == "") {
       isFormValid = false;
@@ -91,12 +99,35 @@ class TeacherAddChildController extends GetxController {
 
     print("User json: ${childUser.toRawJson()}");
 
-    bool postChildUser = await UserProvider().addChildUser(childUser);
+    UserFull? postChildUser = await UserProvider().addChildUser(childUser);
     
-    print("deu certo o post? $postChildUser");
-    
-    TeacherChildrenController teacherChildrenController = Get.find<TeacherChildrenController>();
-    teacherChildrenController.load();
-    closure(postChildUser);
+    if (postChildUser != null) {
+      if (needsSupport) {
+        await addSupport(postChildUser.usuario.crianca.usuario);
+      } 
+
+      TeacherChildrenController teacherChildrenController = Get.find<TeacherChildrenController>();
+      teacherChildrenController.load();
+
+      closure(true);
+    } else {
+      closure(false);
+    }
+  }
+
+  addSupport(String childId) async {
+    SupportBody supportBody = SupportBody(
+      valor: this.valor, 
+      pix: this.pix, 
+      telefone: this.supportTelefone, 
+      livro: this.livro, 
+      criancaUsrId: childId
+    );
+
+    print("support body json: ${supportBody.toRawJson()}");
+
+    bool postSupport = await ChildProvider().addSupport(supportBody);
+
+    print("deu certo o post de support? $postSupport");
   }
 }

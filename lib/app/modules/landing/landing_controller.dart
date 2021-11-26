@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'dart:ui';
 import 'package:gauge_iot/app/data/model/LoginResponse.dart';
 import 'package:gauge_iot/app/data/model/UserFull.dart';
-import 'package:gauge_iot/app/data/model/shared_preferences_manager.dart';
+import 'package:gauge_iot/app/data/model/SharedPreferencesManager.dart';
 import 'package:gauge_iot/app/data/provider/LoginProvider.dart';
 import 'package:gauge_iot/app/data/provider/Storage.dart';
 import 'package:gauge_iot/app/data/provider/UserProvider.dart';

@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 
 class UserProvider {
-  Future<bool> addChildUser(ChildUserBody childBody) async {
+  Future<UserFull?> addChildUser(ChildUserBody childBody) async {
     // Build JSON body
     Map data = childBody.toJson();
     
@@ -15,9 +15,9 @@ class UserProvider {
 
     // Handle response parsing
     if (response.statusCode == 200) {
-      return true;
+      return UserFull.fromRawJson(response.body);
     } else {
-      return false;
+      return null;
     }
   }
 

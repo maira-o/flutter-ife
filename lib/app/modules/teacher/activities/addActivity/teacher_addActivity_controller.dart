@@ -1,7 +1,7 @@
 import 'package:gauge_iot/app/data/model/ActivityBody.dart';
 import 'package:gauge_iot/app/data/model/Child.dart';
 import 'package:gauge_iot/app/data/model/User.dart';
-import 'package:gauge_iot/app/data/model/shared_preferences_manager.dart';
+import 'package:gauge_iot/app/data/model/SharedPreferencesManager.dart';
 import 'package:gauge_iot/app/data/provider/ChildProvider.dart';
 import 'package:gauge_iot/app/data/provider/TeacherProvider.dart';
 import 'package:gauge_iot/app/modules/teacher/activities/teacher_activity_controller.dart';

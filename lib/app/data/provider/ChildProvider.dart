@@ -22,7 +22,7 @@ class ChildProvider {
     }
   }
 
-    Future<bool> addSupport(SupportBody supportBody) async {
+  Future<bool> addSupport(SupportBody supportBody) async {
     // Build JSON body
     Map data = supportBody.toJson();
 

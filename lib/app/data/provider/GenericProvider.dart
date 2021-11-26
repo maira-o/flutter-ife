@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:gauge_iot/app/data/model/shared_preferences_manager.dart';
+import 'package:gauge_iot/app/data/model/SharedPreferencesManager.dart';
 import 'package:gauge_iot/app/data/provider/Storage.dart';
 import 'package:gauge_iot/app/utils/constants.dart';
 import 'package:http/http.dart' as http;

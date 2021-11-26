@@ -413,6 +413,14 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
         ),
         border: OutlineInputBorder()
       ),
+      onChanged: (text) {
+        if (text == "") {
+          // do nothing
+        } else {
+          controller.valor = double.parse(text);
+          controller.validateForm(); 
+        }
+      },
     );
   }
 
@@ -432,6 +440,10 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
         ),
         border: OutlineInputBorder()
       ),
+      onChanged: (text) {
+        controller.pix = text;
+        controller.validateForm(); 
+      },
     );
   }
 
@@ -442,8 +454,8 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
         height: 1.0,
       ),
       decoration: InputDecoration(
-        labelText: "Informações de contato",
-        helperText: "Digite o contato para envio do comprovante PIX",
+        labelText: "Telefone",
+        helperText: "Digite o telefone para envio do comprovante PIX",
         helperStyle: TextStyle(
           color: Colors.black38,
           fontSize: 12,
@@ -451,6 +463,10 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
         ),
         border: OutlineInputBorder()
       ),
+      onChanged: (text) {
+        controller.supportTelefone = text;
+        controller.validateForm(); 
+      },
     );
   }
 
@@ -473,6 +489,10 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
         ),
         border: OutlineInputBorder()
       ),
+      onChanged: (text) {
+        controller.livro = text;
+        controller.validateForm(); 
+      },
     );
   }
 
