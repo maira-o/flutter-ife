@@ -1,26 +1,22 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:gauge_iot/app/data/model/Activity.dart';
-import 'package:gauge_iot/app/routes/app_pages.dart';
 import 'package:gauge_iot/app/utils/constants.dart';
 import 'package:gauge_iot/app/utils/date_parser.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'teacher_activity_controller.dart';
+import 'teacher_support_controller.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:get/get.dart';
 
-class TeacherActivityPage extends GetView<TeacherActivityController> {
+class TeacherSupportPage extends GetView<TeacherSupportController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Atividades")
+        title: Text("Apoios")
                 .textColor(Colors.white),
         centerTitle: false,
         backgroundColor: AppColors.primary
       ),
       extendBody: true,
-      body: GetX<TeacherActivityController>(
+      body: GetX<TeacherSupportController>(
         initState: controller.init(),
         builder: (_) {
           return _.isLoading
@@ -39,25 +35,25 @@ class TeacherActivityPage extends GetView<TeacherActivityController> {
           onRefresh: () => controller.load(),
           child: _listView(),
         )
-        // child: _listView()
       )
-    ).padding(top: 16, left: 16);
+    );
   }
 
   _listView() {
     return ListView.builder(
-      itemCount: controller.activities.length + 1,
+      itemCount: controller.supports.length,
       itemBuilder: (context, index) {
-        if (index == 0 ) return _addNewActivityButton();
         return Dismissible(
           direction: DismissDirection.endToStart,
           key: UniqueKey(), 
-          child: _activityCell(controller.activities[index - 1]),
+          child: _activityCell(index)
+                  .padding(top: 16, left: 16),
           onDismissed: (_) {
-            controller.deleteActyivity(index);
+            controller.deleteSupport(index);
           },
           background: Container(
             color: Colors.red,
+            // margin: EdgeInsets.symmetric(horizontal: 15),
             alignment: Alignment.centerRight,
             child: Icon(
               Icons.delete,
@@ -69,47 +65,24 @@ class TeacherActivityPage extends GetView<TeacherActivityController> {
     );
   }
 
-  _addNewActivityButton() {
-    return ElevatedButton.icon(
-      onPressed: () {
-        controller.selectedActivity = null;
-        Get.toNamed(Routes.TEACHER_ADD_ACTIVITY);
-      }, 
-      icon: Icon(Icons.add, color: AppColors.secondary900), 
-      style: ElevatedButton.styleFrom(
-        primary: AppColors.secondary100,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25),
-        )
-      ),
-      label: Text("adicionar nova atividade".toUpperCase())
-              .textColor(AppColors.secondary900)
-              .padding(vertical: 10)
-    ).padding(left: 16, right: 16, bottom: 16);
-  }
-
-  Widget _activityCell(Activity activity) {
+  Widget _activityCell(int index) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(DateParser.convertToDate(activity.createAt.toString()))
+        Text(DateParser.convertToDate(controller.supports[index].createAt.toString()))
         .textColor(AppColors.primary900)
         .fontSize(10)
         .letterSpacing(1.5),
-        Text(activity.titulo)
+        Text("${controller.children[index].usuario.nome}")
         .textColor(AppColors.secondary300)
         .fontSize(16),
-        Text(activity.descricao, maxLines: 1)
+        Text("${controller.children[index].usuario.crianca.cidade}", maxLines: 1)
         .textColor(AppColors.OnSurface)
         .fontSize(14),
         Divider(
           color: Colors.grey
         )
       ],
-    )
-    .onTap(() {
-      controller.selectedActivity = activity;
-      Get.toNamed(Routes.TEACHER_ADD_ACTIVITY);
-    });
+    );
   }
 }

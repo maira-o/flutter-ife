@@ -1,3 +1,4 @@
+import 'package:gauge_iot/app/data/model/Activity.dart';
 import 'package:gauge_iot/app/data/model/ActivityBody.dart';
 import 'package:gauge_iot/app/data/model/Child.dart';
 import 'package:gauge_iot/app/data/model/User.dart';
@@ -20,6 +21,11 @@ class TeacherAddActivityController extends GetxController {
   List<CriancaElement> children = [];
   String activityTitle = "";
   String activityDescription = "";
+  
+  // Editing variables
+  List<String> selectedChildrenIds = [];
+  bool isEditing = false;
+  String activityId = "";
 
   final _isLoading = false.obs;
   get isLoading => this._isLoading.value;
@@ -37,8 +43,24 @@ class TeacherAddActivityController extends GetxController {
     }
   }
 
-  init() {
+  @override
+  void onInit() {
+    TeacherActivityController activityController = Get.find<TeacherActivityController>();
+
+    if (activityController.selectedActivity != null) {
+      print("Arguments ${Get.arguments}");
+      Activity activity = activityController.selectedActivity!;
+      this.isEditing = true;
+      this.activityId = activity.id;
+      this.activityTitle = activity.titulo;
+      this.activityDescription = activity.descricao;
+      this.selectedChildrenIds = activity.criancas;
+      print("ids: $selectedChildrenIds");
+      validateForm();
+    }
+
     load();
+    super.onInit();
   }
 
   Future<void> load() async {
@@ -52,7 +74,8 @@ class TeacherAddActivityController extends GetxController {
 
     RxList<SelectableChild> auxList = <SelectableChild>[].obs;
     for (var child in children) {
-      SelectableChild auxChild = SelectableChild(false.obs, child.nome, child.id);
+      bool isSelected = selectedChildrenIds.contains(child.id);
+      SelectableChild auxChild = SelectableChild(isSelected.obs, child.nome, child.id);
       auxList.add(auxChild);
     }
     selectableChild.value = auxList;
@@ -63,7 +86,9 @@ class TeacherAddActivityController extends GetxController {
   }
 
   addActivity(Function(bool) closure) async {
-    List<String> childrenIds = selectableChild.map((element) => element.id).toList();
+    isLoading = true;
+    List<SelectableChild> selectableChildSelected = selectableChild.where((element) => element.isSelected.value).toList();
+    List<String> childrenIds = selectableChildSelected.map((element) => element.id).toList();
     
     ActivityBody activityBody = ActivityBody(
       titulo: activityTitle, 
@@ -71,11 +96,18 @@ class TeacherAddActivityController extends GetxController {
       criancas: childrenIds
     );
 
-    bool postActivity = await TeacherProvider().addActivity(activityBody);
+    bool postActivity = false;
 
-    print("deu certo o post? $postActivity");
+    if (isEditing) {
+      postActivity = await TeacherProvider().editActivity(activityBody, this.activityId);
+    } else {
+      postActivity = await TeacherProvider().addActivity(activityBody);
+    }
+
+    print("deu certo o post/put? $postActivity");
     TeacherActivityController activityController = Get.find<TeacherActivityController>();
     activityController.load();
     closure(postActivity);
+    isLoading = false;
   }
 }

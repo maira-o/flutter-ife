@@ -253,7 +253,8 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
 
    _contactTextField() {
     return TextField(
-      keyboardType: TextInputType.phone,
+      keyboardType: TextInputType.number,
+      inputFormatters: [controller.childTelefoneMask],
       style: TextStyle(
         fontSize: 16,
         height: 1.0,
@@ -269,7 +270,7 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
         border: OutlineInputBorder()
       ),
       onChanged: (text) {
-        controller.telefone = text;
+        controller.telefone = controller.childTelefoneMask.getMaskedText();
         controller.validateForm();
       },
     );
@@ -386,8 +387,11 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
         Column(
           children: [
             _supportValue(),
+            SizedBox(height: 16),
             _supportPIX(),
+            SizedBox(height: 16),
             _supportContact(),
+            SizedBox(height: 16),
             _supportInfo()
           ],
         ) 
@@ -449,6 +453,8 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
 
   _supportContact() {
     return TextField(
+      keyboardType: TextInputType.number,
+      inputFormatters: [controller.supportTelefoneMask],
       style: TextStyle(
         fontSize: 16,
         height: 1.0,
@@ -464,7 +470,7 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
         border: OutlineInputBorder()
       ),
       onChanged: (text) {
-        controller.supportTelefone = text;
+        controller.supportTelefone = controller.supportTelefoneMask.getMaskedText();
         controller.validateForm(); 
       },
     );

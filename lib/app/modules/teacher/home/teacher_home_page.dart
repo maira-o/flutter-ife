@@ -59,10 +59,5 @@ class TeacherHomePage extends StatelessWidget {
 
   _teacherIcon() {
     return Image.asset(Assets.home_educador);
-    // return SizedBox(
-    //   width: 156,
-    //   height: 190,
-    //   child: Image.asset(Assets.home_educador),
-    // );
   }
 }

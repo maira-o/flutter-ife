@@ -8,16 +8,18 @@ import 'dart:async';
 class GenericProvider {
   /// Function that sends a CRUD GET request.
   /// Given a URL.
-  static Future<http.Response> getRequest(String url) async {
+  static Future<http.Response> getRequest(String url, String? userIdForHeader) async {
     String token = await SensitiveStorage().readValue(StorageValues.loginToken);
     String? userId = await SharedPreferencesManager.getUserId();
-    var response = await http.get(Uri.parse(url), headers: {
-      "token": '${await SensitiveStorage().readValue(StorageValues.loginToken)}',
-      "userid": '${await SharedPreferencesManager.getUserId()}'
-    });
 
-    print("Token $token");
-    print("User id $userId");
+    if (userIdForHeader != null) {
+      userId = userIdForHeader;
+    }
+
+    var response = await http.get(Uri.parse(url), headers: {
+      "token": token,
+      "userid": userId ?? ""
+    });
 
     return response;
   }
@@ -35,6 +37,23 @@ class GenericProvider {
     String userid = await SharedPreferencesManager.getUserId() ?? "";
 
     var response = http.post(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        "token": token,
+        "userid": userid
+      },
+      body: jsonEncode(data)
+    );
+
+    return response;
+  }
+
+  static Future<http.Response> putRequest(String url, Map data) async {
+    String token = await SensitiveStorage().readValue(StorageValues.loginToken);
+    String userid = await SharedPreferencesManager.getUserId() ?? "";
+
+    var response = http.put(
       Uri.parse(url),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',

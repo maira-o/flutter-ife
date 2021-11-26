@@ -21,8 +21,11 @@ class UserProvider {
     }
   }
 
-  Future<UserFull?> getUserFull(String userId) async {
-    http.Response response = await GenericProvider.getRequest("https://app-ife-gateway.herokuapp.com/usuario/$userId");
+  Future<UserFull?> getUserFull(String userId, String? headerUserId) async {
+    http.Response response = await GenericProvider.getRequest(
+      "https://app-ife-gateway.herokuapp.com/usuario/$userId", 
+      headerUserId
+    );
 
     print("get user full statusCode: ${response.statusCode}");
 

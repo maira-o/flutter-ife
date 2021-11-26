@@ -1,12 +1,10 @@
-import 'package:gauge_iot/app/data/model/Child.dart';
 import 'package:gauge_iot/app/data/model/ChildUserBody.dart';
 import 'package:gauge_iot/app/data/model/Support/SupportBody.dart';
-import 'package:gauge_iot/app/data/model/User.dart';
-import 'package:gauge_iot/app/data/model/SharedPreferencesManager.dart';
 import 'package:gauge_iot/app/data/model/UserFull.dart';
 import 'package:gauge_iot/app/data/provider/ChildProvider.dart';
 import 'package:gauge_iot/app/data/provider/UserProvider.dart';
 import 'package:gauge_iot/app/modules/teacher/children/teacher_children_controller.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:get/get.dart';
 
 class TeacherAddChildController extends GetxController {
@@ -65,6 +63,9 @@ class TeacherAddChildController extends GetxController {
   String pix = "";
   String supportTelefone = "";
   String livro = "";
+
+  var childTelefoneMask = new MaskTextInputFormatter(mask: '(##) #########', filter: { "#": RegExp(r'[0-9]') });
+  var supportTelefoneMask = new MaskTextInputFormatter(mask: '(##) #########', filter: { "#": RegExp(r'[0-9]') });
 
   validateForm() {
     if (email == "" || senha == "") {

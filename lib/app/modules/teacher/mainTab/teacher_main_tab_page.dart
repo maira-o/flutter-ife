@@ -31,6 +31,7 @@ class TeacherMainTabPage extends StatelessWidget {
           topRight: Radius.circular(25.0),
         ),
       child: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: controller.selectedIndex,
         onTap: _onTap,
         backgroundColor: AppColors.primary,
@@ -43,7 +44,9 @@ class TeacherMainTabPage extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.list), label: "Atividades"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.tag_faces), label: "Crianças")
+              icon: Icon(Icons.tag_faces), label: "Crianças"),
+          BottomNavigationBarItem(
+            icon:Image.asset(Assets.support_icon), label: "Apoios")
         ]
       ),
     );

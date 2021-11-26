@@ -7,7 +7,7 @@ import '../endpoints_constants.dart';
 
 class TeacherProvider {
   Future<ActivityResponse?> getActivities(String userId) async {
-    http.Response response = await GenericProvider.getRequest(EndPointConstants.getActivities(userId));
+    http.Response response = await GenericProvider.getRequest(EndPointConstants.getActivities(userId), null);
 
     print("getActivities statuscode: ${response.statusCode}");
 
@@ -42,7 +42,9 @@ class TeacherProvider {
     Map data = activityBody.toJson();
 
     // Call post function and wait for response
-    http.Response response = await GenericProvider.postRequest(EndPointConstants.editActivity(activityId), data);
+    http.Response response = await GenericProvider.putRequest(EndPointConstants.editActivity(activityId), data);
+
+    print("editActivity statuscode: ${response.statusCode}");
 
     // Handle response parsing
     if (response.statusCode == 200) {

@@ -3,6 +3,7 @@ import 'package:gauge_iot/app/data/provider/Storage.dart';
 import 'package:gauge_iot/app/modules/teacher/activities/teacher_activity_page.dart';
 import 'package:gauge_iot/app/modules/teacher/children/teacher_children_page.dart';
 import 'package:gauge_iot/app/modules/teacher/home/teacher_home_page.dart';
+import 'package:gauge_iot/app/modules/teacher/support/teacher_support_page.dart';
 import 'package:gauge_iot/app/utils/constants.dart';
 import 'package:get/get.dart';
 
@@ -17,5 +18,7 @@ class TeacherMainTabController extends GetxController {
     TeacherActivityPage(),
     
     TeacherChildrenPage(),
+
+    TeacherSupportPage()
   ];
 }

@@ -57,7 +57,7 @@ class LandingController extends GetxController {
       SensitiveStorage().writeValue(StorageValues.loginToken, login.token);
 
       if (login.usuario.papel == 2) {
-        UserFull? userFull = await UserProvider().getUserFull(login.usuario.id);
+        UserFull? userFull = await UserProvider().getUserFull(login.usuario.id, null);
 
         if (userFull != null) {
           bool saveTeacherId = await SharedPreferencesManager.saveTeacherKey(userFull.usuario.crianca.educador);

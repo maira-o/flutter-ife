@@ -11,6 +11,8 @@ class TeacherActivityController extends GetxController {
 
   RxList<Activity> activities = <Activity>[].obs;
 
+  Activity? selectedActivity = null;
+
   init() {
     load();
   }
@@ -21,5 +23,19 @@ class TeacherActivityController extends GetxController {
     var activitiesResponse = await TeacherProvider().getActivities(user?.id ?? "");
     activities.value = activitiesResponse?.atividades ?? [];
     isLoading = false;
+  }
+
+  Future<bool> deleteActyivity(int index) async {
+    String activityId = activities[index].id;
+
+    var deleteSupportResponse = await TeacherProvider().deleteActivity(activityId);
+
+    print(deleteSupportResponse);
+
+    if (deleteSupportResponse) {
+      activities.removeAt(index);
+    }
+
+    return deleteSupportResponse;
   }
 }

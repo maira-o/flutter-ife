@@ -16,7 +16,7 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
       ),
       extendBody: true,
       body: GetX<TeacherAddActivityController>(
-            initState: controller.init(),
+            // initState: controller.init(),
             builder: (_) {
               return _.isLoading
               ? Center(child: CircularProgressIndicator())
@@ -63,6 +63,7 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
 
   _activityTitle() {
     return TextField(
+      controller: TextEditingController(text: controller.activityTitle),
       style: TextStyle(
         fontSize: 16,
         height: 1.0,
@@ -86,6 +87,7 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
 
   _obsTextField() {
     return TextField(
+      controller: TextEditingController(text: controller.activityDescription),
       textAlignVertical: TextAlignVertical.top,
       minLines: 4,
       maxLines: null,

@@ -8,7 +8,10 @@ import 'GenericProvider.dart';
 
 class ChildProvider {
     Future<ChildResponse?> getChildren(String userId) async {
-    http.Response response = await GenericProvider.getRequest(EndPointConstants.getChildrenByEducator(userId));
+    http.Response response = await GenericProvider.getRequest(
+      EndPointConstants.getChildrenByEducator(userId),
+      null
+    );
 
     print("getChildren statuscode: ${response.statusCode}");
 
@@ -38,7 +41,9 @@ class ChildProvider {
   }
 
   Future<SupportResponse?> getSupports() async {
-    http.Response response = await GenericProvider.getRequest(EndPointConstants.getSupports);
+    http.Response response = await GenericProvider.getRequest(EndPointConstants.getSupports, null);
+
+    print("getSupports statuscode: ${response.statusCode}");
 
     // Handle response parsing
     if (response.statusCode == 200) {
