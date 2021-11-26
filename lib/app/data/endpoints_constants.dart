@@ -24,5 +24,5 @@ class EndPointConstants {
 
   // POST Constants
   static String login = baseURL + "login";
-
+  static String user = baseURL + "usuario";
 }

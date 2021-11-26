@@ -38,21 +38,20 @@ class TeacherHomePage extends StatelessWidget {
       textAlign: TextAlign.left,
       text: TextSpan(children: <TextSpan>[
         TextSpan(
-            text: "Adicione ",
-            style: TextStyle(color: AppColors.primary900, fontSize: 34)),
+            text: "Solicite apoio ",
+            style: TextStyle( color: AppColors.secondary, fontSize: 30)),
+        TextSpan(  
+            text: "para envio de livros às crianças que precisam e também adicione ",
+            style: TextStyle(color: AppColors.primary900, fontSize: 30)),
         TextSpan(
-            text: "atividades ",
-            style: TextStyle( color: AppColors.secondary, fontSize: 34)),
+            text: "atividades pedagógicas ",
+            style: TextStyle( color: AppColors.secondary, fontSize: 30)),
         TextSpan(
-            text: "pedagógicas e dicas de ",
-            style: TextStyle(color: AppColors.primary900, fontSize: 34)),
+            text: "para os pequenos visualizarem ",
+            style: TextStyle(color: AppColors.primary900, fontSize: 30)),
         TextSpan(
             text: "leitura ",
-            style: TextStyle( color: AppColors.secondary, fontSize: 34)
-        ),
-        TextSpan(
-            text: "para os pequenos!",
-            style: TextStyle(color: AppColors.primary900, fontSize: 34)
+            style: TextStyle( color: AppColors.secondary, fontSize: 30)
         ),
       ]),
     );

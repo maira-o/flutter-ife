@@ -89,9 +89,10 @@ class LandingPage extends GetView<LandingController> {
   }
 
   _ifeSubtitle() {
-    return Text("Aprendizado com afeto")
+    return Text("Um aplicativo de apoio à leitura infantil inclusiva")
+        .textAlignment(TextAlign.center)
         .textColor(AppColors.secondary400)
-        .fontSize(24);
+        .fontSize(20);
   }
 
   _emailTextField() {
@@ -137,15 +138,15 @@ class LandingPage extends GetView<LandingController> {
 
   _button() {
     return ElevatedButton(
-      onPressed: () => controller.login((papel) { 
+      onPressed: () => controller.isFormValid ? controller.login((papel) { 
         if (papel == 1) {
-          controller.isFormValid ? Get.toNamed(Routes.TEACHER_TAB) : null ;
+          Get.toNamed(Routes.TEACHER_TAB);
         } else if (papel == 2) {
-          controller.isFormValid ? Get.toNamed(Routes.CHILD_TAB) : null ;
+          Get.toNamed(Routes.CHILD_TAB);
         }
-      }), 
+      }) : null, 
       style: ElevatedButton.styleFrom(
-        primary: controller.isFormValid ? AppColors.primary : Colors.black38,
+        primary: controller.isFormValid ? AppColors.primary : AppColors.primary50,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         )

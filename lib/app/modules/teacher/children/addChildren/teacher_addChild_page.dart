@@ -6,7 +6,7 @@ import 'teacher_addChild_controller.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:get/get.dart';
 
-class TeacherAddChildPage extends StatelessWidget {
+class TeacherAddChildPage extends GetView<TeacherAddChildController> {
   const TeacherAddChildPage({Key? key}) : super(key: key);
 
   @override
@@ -55,10 +55,15 @@ class TeacherAddChildPage extends StatelessWidget {
   }
 
   _formFields() {
-    TeacherAddChildController controller = Get.find<TeacherAddChildController>();
     return Column(
       children: [
         _nameTextField(),
+        SizedBox(height: 16),
+        _emailTextField(),
+        SizedBox(height: 16),
+        _passwordTextField(),
+        SizedBox(height: 16),
+        _confirmPasswordTextField(),
         SizedBox(height: 16),
         _ageTextField(),
         SizedBox(height: 16),
@@ -70,9 +75,9 @@ class TeacherAddChildPage extends StatelessWidget {
         SizedBox(height: 16),
         _obsTextField(),
         SizedBox(height: 16),
-        _readingLevel(controller),
+        _readingLevel(),
         SizedBox(height: 16),
-        _supportWidget(controller),
+        _supportWidget(),
       ]
     );
   }
@@ -93,18 +98,22 @@ class TeacherAddChildPage extends StatelessWidget {
         ),
         border: OutlineInputBorder()
       ),
+      onChanged: (text) {
+        controller.nome = text;
+        controller.validateForm();
+      },
     );
   }
 
-    _ageTextField() {
+  _emailTextField() {
     return TextField(
       style: TextStyle(
         fontSize: 16,
         height: 1.0,
       ),
       decoration: InputDecoration(
-        labelText: "Idade",
-        helperText: "Digite a idade da criança",
+        labelText: "Email",
+        helperText: "Digite o email para a conta da criança",
         helperStyle: TextStyle(
           color: Colors.black38,
           fontSize: 12,
@@ -112,11 +121,88 @@ class TeacherAddChildPage extends StatelessWidget {
         ),
         border: OutlineInputBorder()
       ),
+      onChanged: (text) {
+        controller.email = text;
+        controller.validateForm();
+      },
+    );
+  }
+
+  _passwordTextField() {
+    return TextField(
+      obscureText: true,
+      style: TextStyle(
+        fontSize: 16,
+        height: 1.0,
+      ),
+      decoration: InputDecoration(
+        labelText: "Senha",
+        helperText: "Digite a senha para a conta da criança",
+        helperStyle: TextStyle(
+          color: Colors.black38,
+          fontSize: 12,
+          height: 0.8
+        ),
+        border: OutlineInputBorder()
+      ),
+      onChanged: (text) {
+        controller.senha = text;
+        controller.validateForm();
+      },
+    );
+  }
+
+  _confirmPasswordTextField() {
+    return TextField(
+      obscureText: true,
+      style: TextStyle(
+        fontSize: 16,
+        height: 1.0,
+      ),
+      decoration: InputDecoration(
+        labelText: "Confirma senha",
+        helperText: "Digite a senha para a conta da criança",
+        helperStyle: TextStyle(
+          color: Colors.black38,
+          fontSize: 12,
+          height: 0.8
+        ),
+        border: OutlineInputBorder()
+      ),
+      onChanged: (text) {
+        controller.confirmaSenha = text;
+        controller.validateForm();
+      },
+    );
+  }
+
+    _ageTextField() {
+    return TextField(
+      keyboardType: TextInputType.datetime,
+      style: TextStyle(
+        fontSize: 16,
+        height: 1.0,
+      ),
+      decoration: InputDecoration(
+        labelText: "Data de nascimento",
+        helperText: "Digite a data de nascimento da criança",
+        helperStyle: TextStyle(
+          color: Colors.black38,
+          fontSize: 12,
+          height: 0.8
+        ),
+        border: OutlineInputBorder()
+      ),
+      onChanged: (text) {
+        controller.dtNasc = text;
+        controller.validateForm();
+      },
     );
   }
 
     _schoolYearTextField() {
     return TextField(
+      keyboardType: TextInputType.number,
       style: TextStyle(
         fontSize: 16,
         height: 1.0,
@@ -131,6 +217,14 @@ class TeacherAddChildPage extends StatelessWidget {
         ),
         border: OutlineInputBorder()
       ),
+      onChanged: (text) {
+        if (text == "") {
+          // do nothing
+        } else {
+          controller.anoEscolar = int.parse(text);
+          controller.validateForm(); 
+        }
+      },
     );
   }
 
@@ -150,17 +244,22 @@ class TeacherAddChildPage extends StatelessWidget {
         ),
         border: OutlineInputBorder()
       ),
+      onChanged: (text) {
+        controller.cidade = text;
+        controller.validateForm();
+      },
     );
   }
 
    _contactTextField() {
     return TextField(
+      keyboardType: TextInputType.phone,
       style: TextStyle(
         fontSize: 16,
         height: 1.0,
       ),
       decoration: InputDecoration(
-        labelText: "Contato",
+        labelText: "Telefone",
         helperText: "Digite as informações de contato",
         helperStyle: TextStyle(
           color: Colors.black38,
@@ -169,6 +268,10 @@ class TeacherAddChildPage extends StatelessWidget {
         ),
         border: OutlineInputBorder()
       ),
+      onChanged: (text) {
+        controller.telefone = text;
+        controller.validateForm();
+      },
     );
   }
 
@@ -191,10 +294,14 @@ class TeacherAddChildPage extends StatelessWidget {
         ),
         border: OutlineInputBorder()
       ),
+      onChanged: (text) {
+        controller.observacoes = text;
+        controller.validateForm();
+      },
     );
   }
 
-  _readingLevel(TeacherAddChildController controller) {
+  _readingLevel() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -210,7 +317,10 @@ class TeacherAddChildPage extends StatelessWidget {
           .fontSize(14),
           controlAffinity: ListTileControlAffinity.trailing,
           value: controller.readingLevel0, 
-          onChanged: (value) => controller.readingLevel0 = value
+          onChanged: (value) {
+            controller.unselectAllReadingLevel();
+            controller.readingLevel0 = value;
+          }
         ),
 
         CheckboxListTile(
@@ -221,7 +331,10 @@ class TeacherAddChildPage extends StatelessWidget {
           .fontSize(14),
           controlAffinity: ListTileControlAffinity.trailing,
           value: controller.readingLevel1, 
-          onChanged: (value) => controller.readingLevel1 = value
+          onChanged: (value) {
+            controller.unselectAllReadingLevel();
+            controller.readingLevel1 = value;
+          } 
         ),
 
         CheckboxListTile(
@@ -232,7 +345,10 @@ class TeacherAddChildPage extends StatelessWidget {
           .fontSize(14),
           controlAffinity: ListTileControlAffinity.trailing,
           value: controller.readingLevel2, 
-          onChanged: (value) => controller.readingLevel2 = value
+          onChanged: (value) {
+            controller.unselectAllReadingLevel();
+            controller.readingLevel2 = value;
+          } 
         ),
 
         CheckboxListTile(
@@ -243,14 +359,16 @@ class TeacherAddChildPage extends StatelessWidget {
           .fontSize(14),
           controlAffinity: ListTileControlAffinity.trailing,
           value: controller.readingLevel3, 
-          onChanged: (value) => controller.readingLevel3 = value
+          onChanged: (value) {
+            controller.unselectAllReadingLevel();
+            controller.readingLevel3 = value;
+          } 
         ),
       ]
     );
   }
 
-  _supportWidget(TeacherAddChildController controller) {
-    // TeacherAddChildController controller = Get.find<TeacherAddChildController>();
+  _supportWidget() {
     return Column(
       children: [
         CheckboxListTile(
@@ -360,7 +478,9 @@ class TeacherAddChildPage extends StatelessWidget {
 
   _button() {
     return ElevatedButton(
-      onPressed: () => print("apertou no botao de adicionar crianca"), 
+      onPressed: () => controller.addChildUser((success) => {
+        Get.back()
+      }), 
       style: ElevatedButton.styleFrom(
         primary: AppColors.primary,
         shape: RoundedRectangleBorder(

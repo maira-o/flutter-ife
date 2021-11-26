@@ -62,11 +62,9 @@ class TeacherAddActivityController extends GetxController {
     selectableChild[index].isSelected.value = value;
   }
 
-  addChild(Function(bool) closure) async {
+  addActivity(Function(bool) closure) async {
     List<String> childrenIds = selectableChild.map((element) => element.id).toList();
-
-    print("childrensids: $childrenIds");
-
+    
     ActivityBody activityBody = ActivityBody(
       titulo: activityTitle, 
       descricao: activityDescription, 

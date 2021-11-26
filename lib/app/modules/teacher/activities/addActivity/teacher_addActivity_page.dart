@@ -147,7 +147,7 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
               )
             );
         } else {
-          controller.addChild((success) {
+          controller.addActivity((success) {
             if (success) {
               Get.back();
             } else {

@@ -29,11 +29,11 @@ class LandingController extends GetxController {
   get isFormValid => this._isFormValid.value;
   set isFormValid(value) => this._isFormValid.value = value;
 
-    validateForm() {
-    if (!email.isEmpty && !password.isEmpty) {
-      isFormValid = true;
-    } else {
+  validateForm() {
+    if (email == "" || password == "") {
       isFormValid = false;
+    } else {
+      isFormValid = true;
     }
   }
 

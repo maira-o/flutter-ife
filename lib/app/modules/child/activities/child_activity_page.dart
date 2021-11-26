@@ -26,23 +26,27 @@ class ChildActivityPage extends StatelessWidget {
     return Styled.widget(
       child: Container(
         height: MediaQuery.of(context).size.height,
-        child: _listView()
+        child: _listView(context)
       )
     ).padding(top: 16, left: 16, right: 16);
   }
 
-  _listView() {
+  _listView(BuildContext context) {
     return ListView.builder(
       itemCount: 10,
       itemBuilder: (context, index) {
-        if (index == 0 ) return _imageView();
+        if (index == 0 ) return _imageView(context);
         return _activityCell();
       },
     );
   }
 
-  _imageView() {
-    return Image.asset(Assets.home_educador)
+  _imageView(BuildContext context) {
+    return SizedBox(
+      child: Image.asset(Assets.home_educador),
+      width: MediaQuery.of(context).size.width * 0.8,
+      height: MediaQuery.of(context).size.width * 0.8
+    )
     .center();
   }
 
