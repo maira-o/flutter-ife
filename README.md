@@ -1,8 +1,10 @@
-# gauge_iot
+# Ife
 
-Gauge Technologies - Voxel
+Projeto final 
 
 ## Getting Started
+
+![teste](https://kauemurakami.github.io/getx_pattern/images/strc.png)
 
 This project is a starting point for a Flutter application.
 
