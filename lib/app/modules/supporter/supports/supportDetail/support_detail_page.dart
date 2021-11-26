@@ -13,7 +13,7 @@ class SupportDetailPage extends GetView<SupportDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Atividades")
+        title: Text("Apoio")
                 .textColor(Colors.white),
         centerTitle: false,
         backgroundColor: AppColors.primary
