@@ -4,6 +4,7 @@ Projeto final
 
 ## Arquitetura do projeto
 
+Utilizamos a arquitetura GetX, segue abaixo um exemplo em imagem:
 ![imagem_arquitetura](https://kauemurakami.github.io/getx_pattern/images/strc.png)
 
 ## Data
