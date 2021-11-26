@@ -2,17 +2,33 @@
 
 Projeto final 
 
-## Getting Started
+## Arquitetura do projeto
 
-![teste](https://kauemurakami.github.io/getx_pattern/images/strc.png)
+![imagem_arquitetura](https://kauemurakami.github.io/getx_pattern/images/strc.png)
 
-This project is a starting point for a Flutter application.
+## Data
+Aqui temos os **models** e os **providers** do projeto
 
-A few resources to get you started if this is your first Flutter project:
+- **Provider**: É o diretório responsável por agrupar nossos provedores de dados.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- **Model**: É o diretório que irá agrupar todas as nossas classes modelos para nossos objetos.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Modules
+
+- **Landing**: 
+Modulo de login do app, utilizado pelos outros 3 modelos
+
+- **Child**:
+Fluxo da criança
+
+- **Teacher**:
+Fluxo do educador
+
+- **Supporter**:
+Fluxo do apoiador
+
+## Routes
+É o diretório responsável por conter o/os nossos arquivos que são resposáveis por gerênciar nossas rotas. 
+
+## Utils
+É o diretório que contem todos os arquivos extras do projeto, como cores constantes, tema do app.
