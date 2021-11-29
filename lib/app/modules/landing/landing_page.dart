@@ -11,10 +11,6 @@ class LandingPage extends GetView<LandingController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Login"),
-      //   backgroundColor: AppColors.primary
-      // ),
       body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: GetX<LandingController>(
@@ -45,20 +41,20 @@ class LandingPage extends GetView<LandingController> {
         child: SingleChildScrollView(
           child: Container(
             width: MediaQuery.of(context).size.width,
-            child: _formFields()
+            child: _formFields(context)
           )
         ),
       ),
     );
   }
 
-  _formFields() {
+  _formFields(BuildContext context) {
     return Column(
       children: [
         _ifeTitleRow(),
         SizedBox(height: 8),
         _ifeSubtitle(),
-        SizedBox(height: 80),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.075),
         _goToApoiadorFlow(),
         SizedBox(height: 16),
         _orLoginLabel(),
@@ -115,7 +111,6 @@ class LandingPage extends GetView<LandingController> {
               .padding(vertical: 10)
     )
     .width(double.infinity);
-    // .elevation(3);
   }
 
   _orLoginLabel() {
