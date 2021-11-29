@@ -47,12 +47,8 @@ class TeacherHomePage extends StatelessWidget {
             text: "atividades pedagógicas ",
             style: TextStyle( color: AppColors.secondary, fontSize: 30)),
         TextSpan(
-            text: "para os pequenos visualizarem ",
+            text: "para os pequenos visualizarem.",
             style: TextStyle(color: AppColors.primary900, fontSize: 30)),
-        TextSpan(
-            text: "leitura ",
-            style: TextStyle( color: AppColors.secondary, fontSize: 30)
-        ),
       ]),
     );
   }
