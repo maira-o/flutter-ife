@@ -26,7 +26,7 @@ class TeacherHomePage extends StatelessWidget {
         child: Column(
           children: [
             _testeRichText(context),
-            _teacherIcon(context)
+            _teacherIcon()
           ]
         )
       )
@@ -53,7 +53,7 @@ class TeacherHomePage extends StatelessWidget {
     );
   }
 
-  _teacherIcon(BuildContext context) {
+  _teacherIcon() {
     return Image.asset(Assets.home_educador);
   }
 }
