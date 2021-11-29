@@ -50,8 +50,6 @@ class LandingController extends GetxController {
 
     LoginResponse? login = await LoginProvider().postLogin(email, password);
 
-    isLoading = false;
-
     if (login != null) {
       bool saveUser = await SharedPreferencesManager.saveUser(login.usuario);
       SensitiveStorage().writeValue(StorageValues.loginToken, login.token);
@@ -70,5 +68,7 @@ class LandingController extends GetxController {
     } else {
       print("erro no login");
     }
+
+    isLoading = false;
   }
 }

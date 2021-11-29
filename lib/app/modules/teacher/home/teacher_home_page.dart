@@ -33,22 +33,22 @@ class TeacherHomePage extends StatelessWidget {
     ).padding(top: 16, left: 16, right: 16);
   }
 
-  _testeRichText(BuildContext context) {
+  Widget _testeRichText(BuildContext context) {
     return RichText(
       textAlign: TextAlign.left,
       text: TextSpan(children: <TextSpan>[
         TextSpan(
             text: "Solicite apoio ",
-            style: TextStyle( color: AppColors.secondary, fontSize: 30)),
+            style: TextStyle( color: AppColors.secondary, fontSize: 24)),
         TextSpan(  
             text: "para envio de livros às crianças que precisam e também adicione ",
-            style: TextStyle(color: AppColors.primary900, fontSize: 30)),
+            style: TextStyle(color: AppColors.primary900, fontSize: 24)),
         TextSpan(
             text: "atividades pedagógicas ",
-            style: TextStyle( color: AppColors.secondary, fontSize: 30)),
+            style: TextStyle( color: AppColors.secondary, fontSize: 24)),
         TextSpan(
             text: "para os pequenos visualizarem.",
-            style: TextStyle(color: AppColors.primary900, fontSize: 30)),
+            style: TextStyle(color: AppColors.primary900, fontSize: 24)),
       ]),
     );
   }
