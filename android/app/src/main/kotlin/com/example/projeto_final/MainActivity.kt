@@ -1,4 +1,4 @@
-package br.com.gaugetecnologia.gauge_iot
+package com.example.projeto_final
 
 import io.flutter.embedding.android.FlutterActivity
 
