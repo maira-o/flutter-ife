@@ -25,7 +25,7 @@ class TeacherActivityController extends GetxController {
     isLoading = false;
   }
 
-  Future<bool> deleteActyivity(int index) async {
+  Future<void> deleteActyivity(int index, Function(bool) closure) async {
     String activityId = activities[index].id;
 
     var deleteSupportResponse = await TeacherProvider().deleteActivity(activityId);
@@ -36,6 +36,6 @@ class TeacherActivityController extends GetxController {
       activities.removeAt(index);
     }
 
-    return deleteSupportResponse;
+    closure(deleteSupportResponse);
   }
 }

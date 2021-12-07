@@ -58,6 +58,8 @@ class ChildProvider {
     Future<bool> deleteSupport(String supportId) async {
     http.Response response = await GenericProvider.deleteRequest(EndPointConstants.deleteSupport(supportId));
 
+    print("deleteSupport statuscode: ${response.statusCode}");
+
     // Handle response parsing
     if (response.statusCode == 200) {
       return true;

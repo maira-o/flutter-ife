@@ -141,6 +141,8 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
         if (!controller.isFormValid) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                elevation: 6.0,
+                behavior: SnackBarBehavior.floating,
                 backgroundColor: Colors.red,
                 content: Text("Complete o form para continuar")
                             .fontSize(24)
@@ -150,13 +152,25 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
             );
         } else {
           controller.addActivity((success) {
+            Get.back();
             if (success) {
-              Get.back();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  elevation: 6.0,
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.red,
+                  content: Text("Sucesso ao adicionar atividade")
+                            .fontSize(24)
+                            .fontWeight(FontWeight.bold)
+                )
+              );
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
+                  elevation: 6.0,
+                  behavior: SnackBarBehavior.floating,
                   backgroundColor: Colors.red,
-                  content: Text("Ocorreu Algum erro")
+                  content: Text("Ocorreu Algum erro ao adicionar atividade")
                             .fontSize(24)
                             .fontWeight(FontWeight.bold)
                 )

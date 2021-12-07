@@ -74,6 +74,10 @@ class GenericProvider {
         "token": '${await SensitiveStorage().readValue(StorageValues.loginToken)}',
         "userid": '${await SharedPreferencesManager.getUserId()}'
     });
+
+    print("url, $url");
+    print("token ${await SensitiveStorage().readValue(StorageValues.loginToken)}");
+    print("userid ${await SharedPreferencesManager.getUserId()}");
     
     return response;
   }

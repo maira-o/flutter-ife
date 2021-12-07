@@ -54,7 +54,31 @@ class TeacherActivityPage extends GetView<TeacherActivityController> {
           key: UniqueKey(), 
           child: _activityCell(controller.activities[index - 1]),
           onDismissed: (_) {
-            controller.deleteActyivity(index);
+            controller.deleteActyivity(index, (responseSuccess) {
+              if (responseSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    elevation: 6.0,
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.red,
+                    content: Text("Sucesso ao excluir a atividade")
+                              .fontSize(24)
+                              .fontWeight(FontWeight.bold)
+                  )
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    elevation: 6.0,
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.red,
+                    content: Text("Ocorreu Algum erro ao excluir a atividade")
+                              .fontSize(24)
+                              .fontWeight(FontWeight.bold)
+                  )
+                );
+              }
+            });
           },
           background: Container(
             color: Colors.red,

@@ -58,6 +58,8 @@ class TeacherProvider {
   Future<bool> deleteActivity(String activityId) async {
     http.Response response = await GenericProvider.deleteRequest(EndPointConstants.deleteActivity(activityId));
 
+    print("deleteActivity statuscode: ${response.statusCode}");
+
     // Handle response parsing
     if (response.statusCode == 200) {
       return true;

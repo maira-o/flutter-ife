@@ -24,7 +24,9 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: GetX<TeacherAddChildController>(
             builder: (_) {
-              return _body(context);
+              return _.isLoading
+              ? Center(child: CircularProgressIndicator())
+              : _body(context);
             },
           ),
       ),
@@ -36,7 +38,7 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
       children: [
         _form(context),
         SizedBox(height: 24),
-        _button(),
+        _button(context),
       ],
     ).padding(vertical: 30, horizontal: 16);
   }
@@ -502,10 +504,34 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
     );
   }
 
-  _button() {
+  _button(BuildContext context) {
     return ElevatedButton(
       onPressed: () => controller.addChildUser((success) => {
-        Get.back()
+        if (success) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              elevation: 6.0,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.green,
+              content: Text("Criança adicionada com sucesso")
+                        .fontSize(18)
+                        .fontWeight(FontWeight.bold)
+            )
+          ),
+          Get.back()
+        } else {
+          Get.back(),
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              elevation: 6.0,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.red,
+              content: Text("Ocorreu Algum erro ao adicionar a criança")
+                        .fontSize(18)
+                        .fontWeight(FontWeight.bold)
+            )
+          )
+        }
       }), 
       style: ElevatedButton.styleFrom(
         primary: AppColors.primary,
