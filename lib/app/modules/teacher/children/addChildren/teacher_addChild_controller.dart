@@ -8,6 +8,10 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:get/get.dart';
 
 class TeacherAddChildController extends GetxController {
+  final _isLoading = false.obs;
+  get isLoading => this._isLoading.value;
+  set isLoading(value) => this._isLoading.value = value;
+
   final _readingLevel0 = false.obs;
   get readingLevel0 => this._readingLevel0.value;
   set readingLevel0(index) {
@@ -83,6 +87,8 @@ class TeacherAddChildController extends GetxController {
   }
 
   addChildUser(Function(bool) closure) async {
+    isLoading = true;
+
     ChildUserBody childUser = ChildUserBody(
       nome: this.nome, 
       email: this.email, 
@@ -114,6 +120,7 @@ class TeacherAddChildController extends GetxController {
     } else {
       closure(false);
     }
+    isLoading = false;
   }
 
   addSupport(String childId) async {

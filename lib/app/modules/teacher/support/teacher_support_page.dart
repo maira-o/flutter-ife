@@ -46,10 +46,34 @@ class TeacherSupportPage extends GetView<TeacherSupportController> {
         return Dismissible(
           direction: DismissDirection.endToStart,
           key: UniqueKey(), 
-          child: _activityCell(index)
-                  .padding(top: 16, left: 16),
+          child: _supportCell(index)
+                  .padding(top: 16, left: 16, right: 16),
           onDismissed: (_) {
-            controller.deleteSupport(index);
+            controller.deleteSupport(index, (responseSuccess) {
+              if (responseSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    elevation: 6.0,
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.red,
+                    content: Text("Sucesso ao excluir o apoio")
+                              .fontSize(24)
+                              .fontWeight(FontWeight.bold)
+                  )
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    elevation: 6.0,
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.red,
+                    content: Text("Ocorreu Algum erro ao excluir o apoio")
+                              .fontSize(24)
+                              .fontWeight(FontWeight.bold)
+                  )
+                );
+              }
+            });
           },
           background: Container(
             color: Colors.red,
@@ -64,24 +88,49 @@ class TeacherSupportPage extends GetView<TeacherSupportController> {
     );
   }
 
-  Widget _activityCell(int index) {
+  Widget _supportCell(int index) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(DateParser.convertToDate(controller.supports[index].createAt.toString()))
-        .textColor(AppColors.primary900)
-        .fontSize(10)
-        .letterSpacing(1.5),
-        Text("${controller.children[index].usuario.nome}")
-        .textColor(AppColors.secondary300)
-        .fontSize(16),
-        Text("${controller.children[index].usuario.crianca.cidade}", maxLines: 1)
-        .textColor(AppColors.OnSurface)
-        .fontSize(14),
+        Row(children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(DateParser.convertToDate(controller.supports[index].createAt.toString()))
+              .textColor(AppColors.primary900)
+              .fontSize(10)
+              .letterSpacing(1.5),
+              Text("${controller.children[index].usuario.nome}")
+              .textColor(AppColors.secondary300)
+              .fontSize(16),
+              Text("${controller.children[index].usuario.crianca.cidade}", maxLines: 1)
+              .textColor(AppColors.OnSurface)
+              .fontSize(14),
+            ],
+          )
+          .expanded(),
+          _supportValueWidget(controller.supports[index].valor),
+        ]),
         Divider(
-          color: Colors.grey
+            color: Colors.grey
         )
       ],
+    );
+  }
+
+  _supportValueWidget(double value) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(30.0),
+      child: Row(
+        children: [
+          SizedBox(width: 8),
+          Icon(Icons.favorite, color: AppColors.secondary900),
+          SizedBox(width: 8),
+          Text("R\$ $value"),
+          SizedBox(width: 8),
+        ],
+      )
+      .padding(all: 8)  
+      .backgroundColor(AppColors.secondary50)
     );
   }
 }

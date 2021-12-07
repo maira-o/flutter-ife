@@ -48,7 +48,6 @@ class SupportDetailPage extends GetView<SupportDetailController> {
         .textColor(AppColors.primary500)
         .fontSize(16),
         Text(controller.supportInfo)
-        .textColor(AppColors.primary500)
         .fontSize(16),
         SizedBox(height: 16),
         Text("Valor de apoio para o livro e envio")
@@ -91,9 +90,16 @@ class SupportDetailPage extends GetView<SupportDetailController> {
               .fontSize(16),
               Text("Copie a chave PIX:")
               .fontSize(16),
-              Text(controller.supportPix)
-              .textColor(AppColors.secondary300)
-              .fontSize(16),
+              SelectableText(
+                controller.supportPix,
+                style: TextStyle(
+                  color: AppColors.secondary300,
+                  fontSize: 16
+                ),
+              )
+              // Text(controller.supportPix)
+              // .textColor(AppColors.secondary300)
+              // .fontSize(16),
             ],
           )
         )
@@ -165,15 +171,23 @@ class SupportDetailPage extends GetView<SupportDetailController> {
               .fontSize(16),
               Text("Envie o comprovante da transação PIX para o número: ")
               .fontSize(16),
-              Text(controller.supportPhone)
-              .textColor(AppColors.secondary300)
-              .fontSize(16),
+              SelectableText(
+                controller.supportPhone,
+                style: TextStyle(
+                  color: AppColors.secondary300,
+                  fontSize: 16
+                ),
+              ),
               Text("Copie e cole a seguinte mensagem:")
               .fontSize(16),
               SizedBox(height: 10),
-              Text("Estou enviando, o valor de R\$ ${controller.supportValue} para apoio e envio do livro para ${controller.childName}.")
-              .textColor(AppColors.primary900)
-              .fontSize(16),
+              SelectableText(
+                "Estou enviando, o valor de R\$ ${controller.supportValue} para apoio e envio do livro para ${controller.childName}.",
+                style: TextStyle(
+                  color: AppColors.primary900,
+                  fontSize: 16
+                ),
+              )
             ],
           ),
         )
