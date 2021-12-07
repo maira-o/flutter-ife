@@ -48,7 +48,7 @@ class SupportPage extends GetView<SupportController> {
       itemCount: controller.supports.length + 1,
       itemBuilder: (context, index) {
         if (index == 0 ) return _imageView(context);
-        return _activityCell(index - 1);
+        return _supportCell(index - 1);
       },
     );
   }
@@ -62,22 +62,30 @@ class SupportPage extends GetView<SupportController> {
     .center();
   }
 
-  Widget _activityCell(int index) {
+  Widget _supportCell(int index) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(DateParser.convertToDate(controller.supports[index].createAt.toString()))
-        .textColor(AppColors.primary900)
-        .fontSize(10)
-        .letterSpacing(1.5),
-        Text("${controller.children[index].usuario.nome}")
-        .textColor(AppColors.secondary300)
-        .fontSize(16),
-        Text("${controller.children[index].usuario.crianca.cidade}", maxLines: 1)
-        .textColor(AppColors.OnSurface)
-        .fontSize(14),
+        Row(children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(DateParser.convertToDate(controller.supports[index].createAt.toString()))
+              .textColor(AppColors.primary900)
+              .fontSize(10)
+              .letterSpacing(1.5),
+              Text("${controller.children[index].usuario.nome}")
+              .textColor(AppColors.secondary300)
+              .fontSize(16),
+              Text("${controller.children[index].usuario.crianca.cidade}", maxLines: 1)
+              .textColor(AppColors.OnSurface)
+              .fontSize(14),
+            ],
+          )
+          .expanded(),
+          _supportValueWidget(controller.supports[index].valor),
+        ]),
         Divider(
-          color: Colors.grey
+            color: Colors.grey
         )
       ],
     )
@@ -87,5 +95,22 @@ class SupportPage extends GetView<SupportController> {
         arguments: [controller.supports[index], controller.children[index]]
       );
     });
+  }
+
+  _supportValueWidget(double value) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(30.0),
+      child: Row(
+        children: [
+          SizedBox(width: 8),
+          Icon(Icons.favorite, color: AppColors.secondary900),
+          SizedBox(width: 8),
+          Text("R\$ $value"),
+          SizedBox(width: 8),
+        ],
+      )
+      .padding(all: 8)  
+      .backgroundColor(AppColors.secondary50)
+    );
   }
 }
