@@ -158,7 +158,7 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
                 SnackBar(
                   elevation: 6.0,
                   behavior: SnackBarBehavior.floating,
-                  backgroundColor: Colors.red,
+                  backgroundColor: Colors.green,
                   content: Text("Sucesso ao adicionar atividade")
                             .fontSize(24)
                             .fontWeight(FontWeight.bold)

@@ -16,21 +16,6 @@ class TeacherSupportController extends GetxController {
     load();
   }
 
-  Future<void> deleteSupport(int index, Function(bool) closure) async {
-    String supportId = supports[index].id;
-
-    var deleteSupportResponse = await ChildProvider().deleteSupport(supportId);
-
-    print(deleteSupportResponse);
-
-    if (deleteSupportResponse) {
-      supports.removeAt(index);
-      children.removeAt(index);
-    }
-
-    closure(deleteSupportResponse);
-  }
-
   Future<void> load() async {
     isLoading = true;
     var supportResponse = await ChildProvider().getSupports();
@@ -51,4 +36,21 @@ class TeacherSupportController extends GetxController {
     children.value = childrenAux;
     isLoading = false;
   }
+
+  Future<void> deleteSupport(int index, Function(bool) closure) async {
+    String supportId = supports[index - 1].id;
+
+    var deleteSupportResponse = await ChildProvider().deleteSupport(supportId);
+
+    print(deleteSupportResponse);
+
+    if (deleteSupportResponse) {
+      supports.removeAt(index);
+      children.removeAt(index);
+    }
+
+    closure(deleteSupportResponse);
+    load();
+  }
+
 }

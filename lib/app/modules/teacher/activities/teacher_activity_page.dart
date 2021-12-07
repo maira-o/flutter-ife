@@ -60,7 +60,7 @@ class TeacherActivityPage extends GetView<TeacherActivityController> {
                   SnackBar(
                     elevation: 6.0,
                     behavior: SnackBarBehavior.floating,
-                    backgroundColor: Colors.red,
+                    backgroundColor: Colors.green,
                     content: Text("Sucesso ao excluir a atividade")
                               .fontSize(24)
                               .fontWeight(FontWeight.bold)

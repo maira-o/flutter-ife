@@ -55,7 +55,7 @@ class TeacherSupportPage extends GetView<TeacherSupportController> {
                   SnackBar(
                     elevation: 6.0,
                     behavior: SnackBarBehavior.floating,
-                    backgroundColor: Colors.red,
+                    backgroundColor: Colors.green,
                     content: Text("Sucesso ao excluir o apoio")
                               .fontSize(24)
                               .fontWeight(FontWeight.bold)
