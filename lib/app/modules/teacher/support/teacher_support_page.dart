@@ -49,7 +49,7 @@ class TeacherSupportPage extends GetView<TeacherSupportController> {
           child: _supportCell(index)
                   .padding(top: 16, left: 16, right: 16),
           onDismissed: (_) {
-            controller.deleteSupport(index, (responseSuccess) {
+            controller.deleteSupport(controller.supports[index], (responseSuccess) {
               if (responseSuccess) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(

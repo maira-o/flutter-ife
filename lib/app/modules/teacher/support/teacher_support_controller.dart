@@ -37,8 +37,10 @@ class TeacherSupportController extends GetxController {
     isLoading = false;
   }
 
-  Future<void> deleteSupport(int index, Function(bool) closure) async {
-    String supportId = supports[index - 1].id;
+  Future<void> deleteSupport(Support support, Function(bool) closure) async {
+    String supportId = support.id;
+
+    int index = supports.indexOf(support);
 
     var deleteSupportResponse = await ChildProvider().deleteSupport(supportId);
 

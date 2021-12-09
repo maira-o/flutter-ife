@@ -25,18 +25,22 @@ class TeacherActivityController extends GetxController {
     isLoading = false;
   }
 
-  Future<void> deleteActyivity(int index, Function(bool) closure) async {
-    String activityId = activities[index - 1].id;
+  Future<void> deleteActyivity(Activity activity, Function(bool) closure) async {
+    print(activity);
+    print(activity);
+    String activityId = activity.id;
 
-    var deleteSupportResponse = await TeacherProvider().deleteActivity(activityId);
+    int index = activities.indexOf(activity);
 
-    print(deleteSupportResponse);
+    var deleteActivityResponse = await TeacherProvider().deleteActivity(activityId);
 
-    if (deleteSupportResponse) {
+    print(deleteActivityResponse);
+
+    if (deleteActivityResponse) {
       activities.removeAt(index);
     }
 
-    closure(deleteSupportResponse);
+    closure(deleteActivityResponse);
     load();
   }
 }

@@ -48,14 +48,12 @@ class TeacherAddActivityController extends GetxController {
     TeacherActivityController activityController = Get.find<TeacherActivityController>();
 
     if (activityController.selectedActivity != null) {
-      print("Arguments ${Get.arguments}");
       Activity activity = activityController.selectedActivity!;
       this.isEditing = true;
       this.activityId = activity.id;
       this.activityTitle = activity.titulo;
       this.activityDescription = activity.descricao;
       this.selectedChildrenIds = activity.criancas;
-      print("ids: $selectedChildrenIds");
       validateForm();
     }
 

@@ -28,7 +28,6 @@ class TeacherChildrenPage extends GetView<TeacherChildrenController> {
           : _body(context);
         }
       )
-      // body: _body(context),
     );
   }
 
@@ -56,7 +55,10 @@ class TeacherChildrenPage extends GetView<TeacherChildrenController> {
 
   _addNewChildButton() {
     return ElevatedButton.icon(
-      onPressed: () => Get.toNamed(Routes.TEACHER_ADD_CHILD), 
+      onPressed: () {
+        controller.selectedChild = null;
+        Get.toNamed(Routes.TEACHER_ADD_CHILD);
+      }, 
       icon: Icon(Icons.add, color: AppColors.secondary900), 
       style: ElevatedButton.styleFrom(
         primary: AppColors.secondary100,
@@ -89,6 +91,10 @@ class TeacherChildrenPage extends GetView<TeacherChildrenController> {
           color: Colors.grey
         )
       ],
-    );
+    )
+    .onTap(() {
+      controller.selectedChild = child;
+      Get.toNamed(Routes.TEACHER_ADD_CHILD);
+    });
   }
 }

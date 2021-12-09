@@ -38,6 +38,10 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
       children: [
         _form(context),
         SizedBox(height: 24),
+        if (controller.isEditing) 
+          Text("Edição de criança não disponivel nesta versão")
+          .fontSize(12),
+          SizedBox(height: 12),
         _button(context),
       ],
     ).padding(vertical: 30, horizontal: 16);
@@ -86,6 +90,8 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
 
   _nameTextField() {
     return TextField(
+      enabled: !controller.isEditing,
+      controller: TextEditingController(text: controller.nome),
       style: TextStyle(
         fontSize: 16,
         height: 1.0,
@@ -109,6 +115,8 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
 
   _emailTextField() {
     return TextField(
+      enabled: !controller.isEditing,
+      controller: TextEditingController(text: controller.email),
       style: TextStyle(
         fontSize: 16,
         height: 1.0,
@@ -132,6 +140,8 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
 
   _passwordTextField() {
     return TextField(
+      enabled: !controller.isEditing,
+      controller: TextEditingController(text: controller.senha),
       obscureText: true,
       style: TextStyle(
         fontSize: 16,
@@ -156,6 +166,8 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
 
   _confirmPasswordTextField() {
     return TextField(
+      enabled: !controller.isEditing,
+      controller: TextEditingController(text: controller.confirmaSenha),
       obscureText: true,
       style: TextStyle(
         fontSize: 16,
@@ -180,6 +192,8 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
 
     _ageTextField() {
     return TextField(
+      enabled: !controller.isEditing,
+      controller: TextEditingController(text: controller.dtNasc),
       keyboardType: TextInputType.datetime,
       style: TextStyle(
         fontSize: 16,
@@ -204,6 +218,8 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
 
     _schoolYearTextField() {
     return TextField(
+      enabled: !controller.isEditing,
+      controller: TextEditingController(text: "${controller.anoEscolar}"),
       keyboardType: TextInputType.number,
       style: TextStyle(
         fontSize: 16,
@@ -232,6 +248,8 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
 
     _cityTextField() {
     return TextField(
+      enabled: !controller.isEditing,
+      controller: TextEditingController(text: controller.cidade),
       style: TextStyle(
         fontSize: 16,
         height: 1.0,
@@ -255,6 +273,8 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
 
    _contactTextField() {
     return TextField(
+      enabled: !controller.isEditing,
+      controller: TextEditingController(text: controller.telefone),
       keyboardType: TextInputType.number,
       inputFormatters: [controller.childTelefoneMask],
       style: TextStyle(
@@ -280,6 +300,8 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
 
   _obsTextField() {
     return TextField(
+      enabled: !controller.isEditing,
+      controller: TextEditingController(text: controller.observacoes),
       textAlignVertical: TextAlignVertical.top,
       minLines: 4,
       maxLines: null,
@@ -321,8 +343,12 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
           controlAffinity: ListTileControlAffinity.trailing,
           value: controller.readingLevel0, 
           onChanged: (value) {
-            controller.unselectAllReadingLevel();
-            controller.readingLevel0 = value;
+            if (controller.isEditing) {
+              null;
+            } else {
+              controller.unselectAllReadingLevel();
+              controller.readingLevel0 = value;
+            }
           }
         ),
 
@@ -335,8 +361,12 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
           controlAffinity: ListTileControlAffinity.trailing,
           value: controller.readingLevel1, 
           onChanged: (value) {
-            controller.unselectAllReadingLevel();
-            controller.readingLevel1 = value;
+            if (controller.isEditing) {
+              null;
+            } else {
+              controller.unselectAllReadingLevel();
+              controller.readingLevel1 = value;
+            }
           } 
         ),
 
@@ -349,8 +379,12 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
           controlAffinity: ListTileControlAffinity.trailing,
           value: controller.readingLevel2, 
           onChanged: (value) {
-            controller.unselectAllReadingLevel();
-            controller.readingLevel2 = value;
+          if (controller.isEditing) {
+              null;
+            } else {
+              controller.unselectAllReadingLevel();
+              controller.readingLevel2 = value;
+            }
           } 
         ),
 
@@ -363,8 +397,12 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
           controlAffinity: ListTileControlAffinity.trailing,
           value: controller.readingLevel3, 
           onChanged: (value) {
-            controller.unselectAllReadingLevel();
-            controller.readingLevel3 = value;
+            if (controller.isEditing) {
+              null;
+            } else {
+              controller.unselectAllReadingLevel();
+              controller.readingLevel3 = value;
+            }
           } 
         ),
       ]
@@ -382,7 +420,13 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
           .fontSize(20),
           controlAffinity: ListTileControlAffinity.trailing,
           value: controller.needsSupport, 
-          onChanged: (value) => controller.needsSupport = value
+          onChanged: (value) {
+            if (controller.isEditing) {
+              null;
+            } else {
+              controller.needsSupport = value;
+            }
+          } 
         ),
         controller.needsSupport 
         ? 
@@ -506,35 +550,41 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
 
   _button(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => controller.addChildUser((success) => {
-        if (success) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              elevation: 6.0,
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: Colors.green,
-              content: Text("Criança adicionada com sucesso")
-                        .fontSize(18)
-                        .fontWeight(FontWeight.bold)
-            )
-          ),
-          Get.back()
+      onPressed: () {
+        if (controller.isEditing) {
+          null;
         } else {
-          Get.back(),
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              elevation: 6.0,
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: Colors.red,
-              content: Text("Ocorreu Algum erro ao adicionar a criança")
-                        .fontSize(18)
-                        .fontWeight(FontWeight.bold)
-            )
-          )
+          controller.addChildUser((success) => {
+            if (success) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  elevation: 6.0,
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.green,
+                  content: Text("Criança adicionada com sucesso")
+                            .fontSize(18)
+                            .fontWeight(FontWeight.bold)
+                )
+              ),
+              Get.back()
+            } else {
+              Get.back(),
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  elevation: 6.0,
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.red,
+                  content: Text("Ocorreu Algum erro ao adicionar a criança")
+                            .fontSize(18)
+                            .fontWeight(FontWeight.bold)
+                )
+              )
+            }
+          });
         }
-      }), 
+      }, 
       style: ElevatedButton.styleFrom(
-        primary: AppColors.primary,
+        primary: !controller.isEditing ? AppColors.primary : AppColors.primary50,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         )

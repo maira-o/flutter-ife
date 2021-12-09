@@ -11,6 +11,8 @@ class TeacherChildrenController extends GetxController {
 
   RxList<CriancaElement> children = <CriancaElement>[].obs;
 
+  CriancaElement? selectedChild = null;
+
   init() {
     load();
   }

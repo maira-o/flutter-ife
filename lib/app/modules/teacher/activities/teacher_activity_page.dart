@@ -54,7 +54,7 @@ class TeacherActivityPage extends GetView<TeacherActivityController> {
           key: UniqueKey(), 
           child: _activityCell(controller.activities[index - 1]),
           onDismissed: (_) {
-            controller.deleteActyivity(index, (responseSuccess) {
+            controller.deleteActyivity(controller.activities[index - 1], (responseSuccess) {
               if (responseSuccess) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(

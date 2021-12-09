@@ -1,9 +1,11 @@
+import 'package:gauge_iot/app/data/model/Child.dart';
 import 'package:gauge_iot/app/data/model/ChildUserBody.dart';
 import 'package:gauge_iot/app/data/model/Support/SupportBody.dart';
 import 'package:gauge_iot/app/data/model/UserFull.dart';
 import 'package:gauge_iot/app/data/provider/ChildProvider.dart';
 import 'package:gauge_iot/app/data/provider/UserProvider.dart';
 import 'package:gauge_iot/app/modules/teacher/children/teacher_children_controller.dart';
+import 'package:gauge_iot/app/utils/date_parser.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:get/get.dart';
 
@@ -70,6 +72,52 @@ class TeacherAddChildController extends GetxController {
 
   var childTelefoneMask = new MaskTextInputFormatter(mask: '(##) #########', filter: { "#": RegExp(r'[0-9]') });
   var supportTelefoneMask = new MaskTextInputFormatter(mask: '(##) #########', filter: { "#": RegExp(r'[0-9]') });
+
+  // Editing variables
+  bool isEditing = false;
+
+    @override
+  void onInit() {
+    TeacherChildrenController childController = Get.find<TeacherChildrenController>();
+
+    if (childController.selectedChild != null) {
+      print("Arguments ${Get.arguments}");
+      CriancaElement editingChild = childController.selectedChild!;
+
+      this.isEditing = true;
+      this.nome = editingChild.nome;
+      this.email = editingChild.email;
+      this.senha = "senha";
+      this.confirmaSenha = "senha";
+      this.dtNasc = DateParser.convertToDate(editingChild.crianca.dtNasc.toString());
+      this.anoEscolar = editingChild.crianca.anoEscolar;
+      this.cidade = editingChild.crianca.cidade;
+      this.uf = editingChild.crianca.uf;
+      this.telefone = editingChild.crianca.telefone;
+      this.observacoes = editingChild.crianca.observacoes;
+      this.nivelLeitura = editingChild.crianca.nivelLeitura;
+
+      switch (this.nivelLeitura) {
+        case 0:
+          readingLevel0 = true;
+          break;
+
+        case 1:
+        readingLevel1 = true;
+          break;
+        
+        case 2:
+        readingLevel2 = true;
+          break;
+
+        case 3:
+        readingLevel3 = true;
+          break;
+        default:
+      }
+    }
+    super.onInit();
+  }
 
   validateForm() {
     if (email == "" || senha == "") {
