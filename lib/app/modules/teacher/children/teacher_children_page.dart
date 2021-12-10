@@ -77,7 +77,7 @@ class TeacherChildrenPage extends GetView<TeacherChildrenController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(DateParser.convertToDate(child.createAt.toString()))
+        Text(DateParser.convertToDate(child.crianca.dtNasc.toString()))
         .textColor(AppColors.primary900)
         .fontSize(10)
         .letterSpacing(1.5),

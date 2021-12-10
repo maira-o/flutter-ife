@@ -83,7 +83,7 @@ class TeacherAddActivityController extends GetxController {
     selectableChild[index].isSelected.value = value;
   }
 
-  addActivity(Function(bool) closure) async {
+  addActivity(Function(bool, bool) closure) async {
     isLoading = true;
     List<SelectableChild> selectableChildSelected = selectableChild.where((element) => element.isSelected.value).toList();
     List<String> childrenIds = selectableChildSelected.map((element) => element.id).toList();
@@ -105,7 +105,7 @@ class TeacherAddActivityController extends GetxController {
     print("deu certo o post/put? $postActivity");
     TeacherActivityController activityController = Get.find<TeacherActivityController>();
     activityController.load();
-    closure(postActivity);
+    closure(postActivity, isEditing);
     isLoading = false;
   }
 }

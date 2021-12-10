@@ -3,11 +3,14 @@ import 'package:gauge_iot/app/data/model/UserFull.dart';
 import 'package:gauge_iot/app/data/provider/ChildProvider.dart';
 import 'package:gauge_iot/app/data/provider/UserProvider.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class TeacherSupportController extends GetxController {
   final _isLoading = false.obs;
   get isLoading => this._isLoading.value;
   set isLoading(value) => this._isLoading.value = value;
+
+  final currency = new NumberFormat("#,##0.00", "pt_BR");
 
   RxList<Support> supports = <Support>[].obs;
   RxList<UserFull> children = <UserFull>[].obs;

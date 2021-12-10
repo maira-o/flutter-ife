@@ -71,6 +71,7 @@ class TeacherAddChildController extends GetxController {
   String livro = "";
 
   var childTelefoneMask = new MaskTextInputFormatter(mask: '(##) #########', filter: { "#": RegExp(r'[0-9]') });
+  var childDateMask = new MaskTextInputFormatter(mask: '##/##/####', filter: { "#": RegExp(r'[0-9]') });
   var supportTelefoneMask = new MaskTextInputFormatter(mask: '(##) #########', filter: { "#": RegExp(r'[0-9]') });
 
   // Editing variables

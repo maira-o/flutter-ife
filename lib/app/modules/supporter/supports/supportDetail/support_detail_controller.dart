@@ -2,6 +2,7 @@ import 'package:gauge_iot/app/data/model/Support/Support.dart';
 import 'package:gauge_iot/app/data/model/UserFull.dart';
 import 'package:gauge_iot/app/utils/date_parser.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class SupportDetailController extends GetxController {
   String supportDate = "";
@@ -11,6 +12,8 @@ class SupportDetailController extends GetxController {
   double supportValue = 0;
   String supportPix = "";
   String supportPhone = "";
+
+  final currency = new NumberFormat("#,##0.00", "pt_BR");
 
   @override
   void onInit() {

@@ -53,7 +53,7 @@ class SupportDetailPage extends GetView<SupportDetailController> {
         Text("Valor de apoio para o livro e envio")
         .textColor(AppColors.primary500)
         .fontSize(16),
-        Text("R\$ ${controller.supportValue}")
+        Text("R\$ ${controller.currency.format(controller.supportValue)}")
         .fontSize(16),
         SizedBox(height: 16),
         _firstSetpWidget(),
@@ -134,7 +134,7 @@ class SupportDetailPage extends GetView<SupportDetailController> {
               .fontSize(16),
               Text("Abra um aplicativo que você tenha o PIX habilitado e realiza a transação no valor de: ")
               .fontSize(16),
-              Text("R\$ ${controller.supportValue}")
+              Text("R\$ ${controller.currency.format(controller.supportValue)}")
               .textColor(AppColors.secondary300)
               .fontSize(16),
             ],
@@ -182,7 +182,7 @@ class SupportDetailPage extends GetView<SupportDetailController> {
               .fontSize(16),
               SizedBox(height: 10),
               SelectableText(
-                "Estou enviando, o valor de R\$ ${controller.supportValue} para apoio e envio do livro para ${controller.childName}.",
+                "Estou enviando, o valor de R\$ ${controller.currency.format(controller.supportValue)} para apoio e envio do livro para ${controller.childName}.",
                 style: TextStyle(
                   color: AppColors.primary900,
                   fontSize: 16

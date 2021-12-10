@@ -195,6 +195,7 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
       enabled: !controller.isEditing,
       controller: TextEditingController(text: controller.dtNasc),
       keyboardType: TextInputType.datetime,
+      inputFormatters: [controller.childDateMask],
       style: TextStyle(
         fontSize: 16,
         height: 1.0,
@@ -210,7 +211,7 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
         border: OutlineInputBorder()
       ),
       onChanged: (text) {
-        controller.dtNasc = text;
+        controller.dtNasc = controller.childDateMask.getMaskedText();
         controller.validateForm();
       },
     );
@@ -219,7 +220,7 @@ class TeacherAddChildPage extends GetView<TeacherAddChildController> {
     _schoolYearTextField() {
     return TextField(
       enabled: !controller.isEditing,
-      controller: TextEditingController(text: "${controller.anoEscolar}"),
+      controller: TextEditingController(text: controller.anoEscolar == 0 ? "" : "${controller.anoEscolar}"),
       keyboardType: TextInputType.number,
       style: TextStyle(
         fontSize: 16,

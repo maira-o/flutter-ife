@@ -151,7 +151,7 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
               )
             );
         } else {
-          controller.addActivity((success) {
+          controller.addActivity((success, isEditing) {
             Get.back();
             if (success) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -159,9 +159,14 @@ class TeacherAddActivityPage extends GetView<TeacherAddActivityController> {
                   elevation: 6.0,
                   behavior: SnackBarBehavior.floating,
                   backgroundColor: Colors.green,
-                  content: Text("Sucesso ao adicionar atividade")
-                            .fontSize(24)
-                            .fontWeight(FontWeight.bold)
+                  content: isEditing ? 
+                  Text("Sucesso ao editar atividade")
+                  .fontSize(24)
+                  .fontWeight(FontWeight.bold) 
+                  : 
+                  Text("Sucesso ao adicionar atividade")
+                    .fontSize(24)
+                    .fontWeight(FontWeight.bold)
                 )
               );
             } else {

@@ -125,7 +125,7 @@ class TeacherSupportPage extends GetView<TeacherSupportController> {
           SizedBox(width: 8),
           Icon(Icons.favorite, color: AppColors.secondary900),
           SizedBox(width: 8),
-          Text("R\$ $value"),
+          Text("R\$ ${controller.currency.format(value)}"),
           SizedBox(width: 8),
         ],
       )
