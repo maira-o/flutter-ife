@@ -42,6 +42,14 @@ class Assets {
   static const String home_educador = "lib/app/utils/assets/educador.png";
   static const String book_heart = "lib/app/utils/assets/book_heart.png";
   static const String support_icon = "lib/app/utils/assets/supportTabIcon.png";
+
+  // Reações
+  static const String brabo_icon = "lib/app/utils/assets/brabo.png";
+  static const String choro_icon = "lib/app/utils/assets/choro.png";
+  static const String coracao_icon = "lib/app/utils/assets/coracao.png";
+  static const String like_icon = "lib/app/utils/assets/like.png";
+  static const String lingua_icon = "lib/app/utils/assets/lingua.png";
+  static const String surpresa_icon = "lib/app/utils/assets/surpresa.png";
 }
 
 class StorageValues {
