@@ -61,7 +61,7 @@ class ChildProvider {
     print("deleteSupport statuscode: ${response.statusCode}");
 
     // Handle response parsing
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 204) {
       return true;
     } else {
       return false;

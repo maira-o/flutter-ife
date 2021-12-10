@@ -1,7 +1,9 @@
 import 'package:gauge_iot/app/data/model/Activity.dart';
 import 'package:gauge_iot/app/data/model/User.dart';
 import 'package:gauge_iot/app/data/model/SharedPreferencesManager.dart';
+import 'package:gauge_iot/app/data/provider/Storage.dart';
 import 'package:gauge_iot/app/data/provider/TeacherProvider.dart';
+import 'package:gauge_iot/app/utils/constants.dart';
 import 'package:get/get.dart';
 
 class TeacherActivityController extends GetxController {
@@ -22,6 +24,10 @@ class TeacherActivityController extends GetxController {
     Usuario? user = await SharedPreferencesManager.getUser();
     var activitiesResponse = await TeacherProvider().getActivities(user?.id ?? "");
     activities.value = activitiesResponse?.atividades ?? [];
+
+    print("token ${await SensitiveStorage().readValue(StorageValues.loginToken)}");
+    print("userid ${await SharedPreferencesManager.getUserId()}");
+
     isLoading = false;
   }
 

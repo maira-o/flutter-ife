@@ -81,8 +81,9 @@ class TeacherAddChildController extends GetxController {
     TeacherChildrenController childController = Get.find<TeacherChildrenController>();
 
     if (childController.selectedChild != null) {
-      print("Arguments ${Get.arguments}");
       CriancaElement editingChild = childController.selectedChild!;
+
+      print("id da crianca: ${editingChild.id}");
 
       this.isEditing = true;
       this.nome = editingChild.nome;

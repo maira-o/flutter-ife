@@ -46,6 +46,9 @@ class GenericProvider {
       body: jsonEncode(data)
     );
 
+    print("token $token");
+    print("userid $userid");
+
     return response;
   }
 
@@ -74,10 +77,6 @@ class GenericProvider {
         "token": '${await SensitiveStorage().readValue(StorageValues.loginToken)}',
         "userid": '${await SharedPreferencesManager.getUserId()}'
     });
-
-    print("url, $url");
-    print("token ${await SensitiveStorage().readValue(StorageValues.loginToken)}");
-    print("userid ${await SharedPreferencesManager.getUserId()}");
     
     return response;
   }
