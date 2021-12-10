@@ -21,12 +21,11 @@ class ChildActivityDetailPage extends GetView<ChildActivityDetailController> {
       extendBody: true,
       body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: _body(context),
-          // child: GetX<ChildActivityDetailController>(
-          //   builder: (_) {
-          //     return _body(context);
-          //   },
-          // ),
+          child: GetX<ChildActivityDetailController>(
+            builder: (_) {
+              return _body(context);
+            },
+          ),
       ),
     );
   }
@@ -66,24 +65,30 @@ class ChildActivityDetailPage extends GetView<ChildActivityDetailController> {
   _emotionsRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _emotionWidget(Assets.like_icon, false, () => {}),
-        _emotionWidget(Assets.lingua_icon, false, () => {}),
-        _emotionWidget(Assets.coracao_icon, true, () => {}),
-        _emotionWidget(Assets.choro_icon, false, () => {}),
-        _emotionWidget(Assets.surpresa_icon, false, () => {}),
-        _emotionWidget(Assets.brabo_icon, false, () => {}),
-      ]
+      children: _getEmotionsWidgets()
     );
   }
 
-  _emotionWidget(String icon, bool isSelected, Function didTap) {
+  List<Widget> _getEmotionsWidgets() {
+    List<Widget> emotionList = [];
+
+    for (var emotion in controller.emotions) {
+      emotionList.add(_emotionWidget(emotion));
+    }
+
+    return emotionList;
+  }
+
+  _emotionWidget(Emotion emotion) {
     return Container(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: isSelected ? AppColors.secondary100 : null,
+          color: emotion.isSelected.value? AppColors.secondary100 : null,
         ),
-        child: Image.asset(icon).padding(all: 4)
-    );
+        child: Image.asset(emotion.icon).padding(all: 4)
+    )
+    .onTap(() {
+      controller.selectEmotion(emotion.id);
+    });
   }
 }
